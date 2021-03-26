@@ -11,20 +11,23 @@ import UIKit
 class ViewController: UIViewController {
     
     let mapView = MKMapView()
+    let locationManager = CLLocationManager()
     let searchView = CustomView()
     let searchViewBackImage = UIImageView()
     let searchViewImage = UIImageView()
     let searchViewLabel = UILabel()
-//    let searchViewBackImage = UIImage(systemName: "magnifyingglass")?.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
-//    let searchViewImage = UIImage(systemName: "list.bullet")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+    
+
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        mapView.showsUserLocation = true
-//        reRegion()
+        mapView.showsUserLocation = true
+        reRegion()
         setUI()
         setSearchView()
+        addAnnotation()
+        setupLocationManager()
         
         
     }
@@ -77,18 +80,31 @@ class ViewController: UIViewController {
     }
   
     
-//    func setupLocationManager() {
+    func setupLocationManager() {
 //        locationManager.delegate = self
-//        locationManager.requestWhenInUseAuthorization() //권한 요청
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.distanceFilter = kCLDistanceFilterNone
-//        locationManager.startUpdatingLocation()
-//    }
+        locationManager.requestWhenInUseAuthorization() //권한 요청
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.startUpdatingLocation()
+    }
     
     // 내 위치 잡을때
     func reRegion() {
         let region = MKCoordinateRegion(center: mapView.userLocation.coordinate, latitudinalMeters: 10, longitudinalMeters: 10)
         mapView.setRegion(region, animated: true)
+    }
+    
+    //맵에서 위치 표시하는 화살표를 어노테이션 이라고 함
+    func addAnnotation() {
+        let annotation = MKPointAnnotation()
+        //위도, 경도
+//        annotation.coordinate = CLLocationCoordinate2D(latitude: 37.85, longitude: -122.4194)
+        //내 위치 찍을때
+        annotation.coordinate = mapView.userLocation.coordinate
+        annotation.title = "shin.mini"
+        annotation.subtitle = "I'm here"
+        mapView.addAnnotation(annotation)
+        
     }
     
     @objc
@@ -98,6 +114,27 @@ class ViewController: UIViewController {
         
         }
 }
+
+//extension ViewController: CLLocationManagerDelegate {
+//
+//}
+
+//extension ViewController: MKMapViewDelegate {
+//    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+//        addAnnotation()
+//        reRegion()
+//    }
+//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//        if annotation is MKUserLocation { return nil } // 이거 안해주면 파란색 점 안 보이고 커피로 인식
+//        let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "annotation")
+//        annotationView.glyphText = "coffee"
+//        annotationView.canShowCallout = true
+//        annotationView.leftCalloutAccessoryView = createImageViewForAnnotation(annotationView: annotationView, imageName: "coffee") // 왼쪽에 사진 넣기
+//        annotationView.rightCalloutAccessoryView = createImageViewForAnnotation(annotationView: annotationView, imageName: "coffee") // 오른쪽에 사진 넣기
+//        return annotationView //
+//
+//    }
+//}
 
 
 extension ViewController {

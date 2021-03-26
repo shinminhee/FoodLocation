@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5624714164E8AAE2C9E04D55 /* Pods_FoodLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 577D48C04F97BAFD8A6E7A43 /* Pods_FoodLocation.framework */; };
 		5E808423260C0B2400BA75FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E808422260C0B2400BA75FB /* AppDelegate.swift */; };
 		5E808425260C0B2400BA75FB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E808424260C0B2400BA75FB /* SceneDelegate.swift */; };
 		5E808427260C0B2400BA75FB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E808426260C0B2400BA75FB /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		577D48C04F97BAFD8A6E7A43 /* Pods_FoodLocation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodLocation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E80841F260C0B2400BA75FB /* FoodLocation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodLocation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E808422260C0B2400BA75FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E808424260C0B2400BA75FB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -34,6 +36,8 @@
 		5E808446260C4B9700BA75FB /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		5E80844B260C665400BA75FB /* LogINViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogINViewController.swift; sourceTree = "<group>"; };
 		5E80844F260C6DCE00BA75FB /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		729286C0CB21AD826820FC58 /* Pods-FoodLocation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLocation.release.xcconfig"; path = "Target Support Files/Pods-FoodLocation/Pods-FoodLocation.release.xcconfig"; sourceTree = "<group>"; };
+		A59163E39AA75BB0477CDB72 /* Pods-FoodLocation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLocation.debug.xcconfig"; path = "Target Support Files/Pods-FoodLocation/Pods-FoodLocation.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5624714164E8AAE2C9E04D55 /* Pods_FoodLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +57,8 @@
 			children = (
 				5E808421260C0B2400BA75FB /* FoodLocation */,
 				5E808420260C0B2400BA75FB /* Products */,
+				705BB80B6449426997D36FD2 /* Pods */,
+				E462086057E1E11A47CC69D4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,6 +113,24 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		705BB80B6449426997D36FD2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A59163E39AA75BB0477CDB72 /* Pods-FoodLocation.debug.xcconfig */,
+				729286C0CB21AD826820FC58 /* Pods-FoodLocation.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E462086057E1E11A47CC69D4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				577D48C04F97BAFD8A6E7A43 /* Pods_FoodLocation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -113,6 +138,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5E808433260C0B2500BA75FB /* Build configuration list for PBXNativeTarget "FoodLocation" */;
 			buildPhases = (
+				D0D05D458133313DC842A176 /* [CP] Check Pods Manifest.lock */,
 				5E80841B260C0B2400BA75FB /* Sources */,
 				5E80841C260C0B2400BA75FB /* Frameworks */,
 				5E80841D260C0B2400BA75FB /* Resources */,
@@ -169,6 +195,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D0D05D458133313DC842A176 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FoodLocation-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5E80841B260C0B2400BA75FB /* Sources */ = {
@@ -319,6 +370,7 @@
 		};
 		5E808434260C0B2500BA75FB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A59163E39AA75BB0477CDB72 /* Pods-FoodLocation.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -338,6 +390,7 @@
 		};
 		5E808435260C0B2500BA75FB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 729286C0CB21AD826820FC58 /* Pods-FoodLocation.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

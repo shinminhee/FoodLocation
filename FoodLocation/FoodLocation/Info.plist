@@ -60,3 +60,14 @@
 	</array>
 </dict>
 </plist>
+<key>CFBundleURLTypes</key>
+   <array>
+     <dict>
+       <key>CFBundleTypeRole</key>
+       <string>Editor</string>
+       <key>CFBundleURLSchemes</key>
+       <array>
+         <string>com.googleusercontent.apps.[클라이언트 ID]</string>
+       </array>
+     </dict>
+   </array>
