@@ -25,7 +25,7 @@ class LocationViewController: UIViewController {
         webView = WKWebView(frame: .zero, configuration: configuration)
         webView?.navigationDelegate = self
         
-        guard let url = URL(string: "https://shinminhee.github.io/Kakao-Locationcode/"),
+        guard let url = URL(string: "hhttps://shinminhee.github.io/FoodLocation/"),
             let webView = webView
             else { return }
         let request = URLRequest(url: url)

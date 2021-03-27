@@ -62,7 +62,7 @@ class StoreViewController: UIViewController {
         smallLabel.font = UIFont.systemFont(ofSize: 18, weight: .light)
         
         registrationButton.setTitle("등록 하러 가기", for: .normal)
-        registrationButton.setTitleColor(.black, for: .focused)
+        registrationButton.setTitleColor(.black, for: .normal)
         registrationButton.layer.cornerRadius = 10
         registrationButton.backgroundColor = UIColor(red: 255/255, green: 212/255, blue: 100/255, alpha: 1)
         registrationButton.layer.borderColor = UIColor.lightGray.cgColor
@@ -77,7 +77,7 @@ class StoreViewController: UIViewController {
     }
     
     @objc func logIn(_ sender: UIButton) {
-        let logInVC = LogINViewController()
+        let logInVC = RegistrationTableViewController()
         logInVC.modalPresentationStyle = .fullScreen
         present(logInVC, animated: true, completion: nil)
     }

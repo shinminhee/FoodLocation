@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RegistrationViewController: UIViewController {
+class PersonalViewController: UIViewController {
     
     let backgroundView = UIView()
     let logInLabel = UILabel()

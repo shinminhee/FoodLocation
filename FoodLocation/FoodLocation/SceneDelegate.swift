@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         let firstView  = ViewController()
         let StoreView = StoreViewController()
-        let logInView = RegistrationViewController()
+        let logInView = PersonalViewController()
         
         firstView.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "magnifyingglass"), tag: 0)
         StoreView.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "highlighter"), tag: 0)

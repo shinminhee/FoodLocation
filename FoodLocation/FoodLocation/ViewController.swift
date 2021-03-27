@@ -22,12 +22,12 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapView.showsUserLocation = true
-        reRegion()
+//        mapView.showsUserLocation = true
+//        reRegion()
         setUI()
         setSearchView()
-        addAnnotation()
-        setupLocationManager()
+//        addAnnotation()
+//        setupLocationManager()
         
         
     }

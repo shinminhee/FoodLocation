@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5624714164E8AAE2C9E04D55 /* Pods_FoodLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 577D48C04F97BAFD8A6E7A43 /* Pods_FoodLocation.framework */; };
+		5E4E0267260F25DE001FF770 /* RegistrationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E0266260F25DE001FF770 /* RegistrationTableViewCell.swift */; };
+		5E4E026A260F2660001FF770 /* RegistrationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E0269260F2660001FF770 /* RegistrationTableViewController.swift */; };
 		5E808423260C0B2400BA75FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E808422260C0B2400BA75FB /* AppDelegate.swift */; };
 		5E808425260C0B2400BA75FB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E808424260C0B2400BA75FB /* SceneDelegate.swift */; };
 		5E808427260C0B2400BA75FB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E808426260C0B2400BA75FB /* ViewController.swift */; };
@@ -15,7 +17,7 @@
 		5E80842F260C0B2500BA75FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E80842D260C0B2500BA75FB /* LaunchScreen.storyboard */; };
 		5E80843D260C2EEB00BA75FB /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E80843C260C2EEB00BA75FB /* SearchView.swift */; };
 		5E808441260C43B200BA75FB /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E808440260C43B200BA75FB /* StoreViewController.swift */; };
-		5E808444260C43C100BA75FB /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E808443260C43C100BA75FB /* RegistrationViewController.swift */; };
+		5E808444260C43C100BA75FB /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E808443260C43C100BA75FB /* PersonalViewController.swift */; };
 		5E808447260C4B9700BA75FB /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E808446260C4B9700BA75FB /* LocationViewController.swift */; };
 		5E80844C260C665400BA75FB /* LogINViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E80844B260C665400BA75FB /* LogINViewController.swift */; };
 		5E808450260C6DCE00BA75FB /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E80844F260C6DCE00BA75FB /* SettingViewController.swift */; };
@@ -23,6 +25,8 @@
 
 /* Begin PBXFileReference section */
 		577D48C04F97BAFD8A6E7A43 /* Pods_FoodLocation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodLocation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E4E0266260F25DE001FF770 /* RegistrationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTableViewCell.swift; sourceTree = "<group>"; };
+		5E4E0269260F2660001FF770 /* RegistrationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTableViewController.swift; sourceTree = "<group>"; };
 		5E80841F260C0B2400BA75FB /* FoodLocation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodLocation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E808422260C0B2400BA75FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E808424260C0B2400BA75FB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,7 +36,7 @@
 		5E808430260C0B2500BA75FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E80843C260C2EEB00BA75FB /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		5E808440260C43B200BA75FB /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
-		5E808443260C43C100BA75FB /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		5E808443260C43C100BA75FB /* PersonalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalViewController.swift; sourceTree = "<group>"; };
 		5E808446260C4B9700BA75FB /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		5E80844B260C665400BA75FB /* LogINViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogINViewController.swift; sourceTree = "<group>"; };
 		5E80844F260C6DCE00BA75FB /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -80,8 +84,9 @@
 				5E808424260C0B2400BA75FB /* SceneDelegate.swift */,
 				5E808426260C0B2400BA75FB /* ViewController.swift */,
 				5E808440260C43B200BA75FB /* StoreViewController.swift */,
-				5E808443260C43C100BA75FB /* RegistrationViewController.swift */,
+				5E808443260C43C100BA75FB /* PersonalViewController.swift */,
 				5E80844F260C6DCE00BA75FB /* SettingViewController.swift */,
+				5E4E0269260F2660001FF770 /* RegistrationTableViewController.swift */,
 				5E80842B260C0B2500BA75FB /* Assets.xcassets */,
 				5E80842D260C0B2500BA75FB /* LaunchScreen.storyboard */,
 				5E808430260C0B2500BA75FB /* Info.plist */,
@@ -109,6 +114,7 @@
 				5E80843C260C2EEB00BA75FB /* SearchView.swift */,
 				5E808446260C4B9700BA75FB /* LocationViewController.swift */,
 				5E80844B260C665400BA75FB /* LogINViewController.swift */,
+				5E4E0266260F25DE001FF770 /* RegistrationTableViewCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -119,7 +125,6 @@
 				A59163E39AA75BB0477CDB72 /* Pods-FoodLocation.debug.xcconfig */,
 				729286C0CB21AD826820FC58 /* Pods-FoodLocation.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -233,7 +238,9 @@
 				5E80844C260C665400BA75FB /* LogINViewController.swift in Sources */,
 				5E808450260C6DCE00BA75FB /* SettingViewController.swift in Sources */,
 				5E808423260C0B2400BA75FB /* AppDelegate.swift in Sources */,
-				5E808444260C43C100BA75FB /* RegistrationViewController.swift in Sources */,
+				5E4E026A260F2660001FF770 /* RegistrationTableViewController.swift in Sources */,
+				5E808444260C43C100BA75FB /* PersonalViewController.swift in Sources */,
+				5E4E0267260F25DE001FF770 /* RegistrationTableViewCell.swift in Sources */,
 				5E808425260C0B2400BA75FB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
