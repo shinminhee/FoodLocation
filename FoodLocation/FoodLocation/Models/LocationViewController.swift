@@ -25,7 +25,7 @@ class LocationViewController: UIViewController {
         webView = WKWebView(frame: .zero, configuration: configuration)
         webView?.navigationDelegate = self
         
-        guard let url = URL(string: "hhttps://shinminhee.github.io/FoodLocation/"),
+        guard let url = URL(string: "https://shinminhee.github.io/FoodLocation/"),
             let webView = webView
             else { return }
         let request = URLRequest(url: url)
@@ -54,12 +54,14 @@ class LocationViewController: UIViewController {
 }
 
 extension LocationViewController: WKScriptMessageHandler {
+    
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         
         if let data = message.body as? [String: Any] {
             address = data["roadAddress"] as? String ?? ""
         }
-        guard let firstVC = presentingViewController as? ViewController else { return }
+        guard let tabBarController = presentingViewController as? UITabBarController else { return }
+        guard let firstVC = tabBarController.viewControllers?.first as? ViewController else { return }
         firstVC.searchViewLabel.text = address
         self.dismiss(animated: true, completion: nil)
         

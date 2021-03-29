@@ -32,6 +32,7 @@ class ViewController: UIViewController {
         
     }
     
+    
     func setSearchView() {
         view.addSubview(searchView)
         [searchView, searchViewLabel, searchViewImage, searchViewBackImage].forEach { (view) in

@@ -24,7 +24,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         logInView.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "person"), tag: 0)
         
         let tabBarController = UITabBarController()
-        
         tabBarController.viewControllers = [firstView, StoreView, logInView]
         
         window?.rootViewController = tabBarController
