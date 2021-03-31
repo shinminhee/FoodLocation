@@ -20,7 +20,7 @@ class PersonalViewController: UIViewController {
         view.backgroundColor = .white
        
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
-//        navigationItem.rightBarButtonItem = rightBarButtonItem
+        
         rightBarButtonItem.isEnabled = false
         setUI()
         

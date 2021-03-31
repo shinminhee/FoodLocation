@@ -18,14 +18,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let firstView  = ViewController()
         let StoreView = StoreViewController()
         let logInView = PersonalViewController()
+        let naviLoginView = UINavigationController(rootViewController: logInView)
+//        let loginView = UINavigationController(rootViewController: PersonalViewController())
+        // 위에 두개랑 이거 하나랑 같은 뜻
         
         firstView.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "magnifyingglass"), tag: 0)
         StoreView.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "highlighter"), tag: 0)
-        logInView.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "person"), tag: 0)
+        naviLoginView.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "person"), tag: 0)
         
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [firstView, StoreView, logInView]
+        tabBarController.viewControllers = [firstView, StoreView, naviLoginView]
         
+        UINavigationBar.setTransparentTabbar()
+
         window?.rootViewController = tabBarController
         window?.backgroundColor = .black
         window?.makeKeyAndVisible()
@@ -61,5 +66,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
     
     
+}
+
+extension UINavigationBar {
+    
+    static func setTransparentTabbar() {
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().shadowImage     = UIImage()
+        UINavigationBar.appearance().clipsToBounds   = true
+    } // 네비게이션바 투명하게 처리
 }
 
