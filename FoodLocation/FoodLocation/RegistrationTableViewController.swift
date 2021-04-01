@@ -14,11 +14,13 @@ class RegistrationTableViewController: UIViewController {
     let closeButton = UIImageView()
     let menuTableView = UITableView(frame: .zero, style: .grouped)
     let data = ["가게 이름", "위치", "메뉴", "맛/수량/가격 \n상세설명"]
+    let textField = UITextField()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        menuTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         setUI()
         setTableView()
         
@@ -110,29 +112,20 @@ extension RegistrationTableViewController: UITableViewDataSource {
         return "\(data[section])"
         
     }
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//
-//        let myLabel = UILabel()
-//        myLabel.frame = CGRect(x: 20, y: 8, width: 320, height: 20)
-//        myLabel.font = UIFont.boldSystemFont(ofSize: 18)
-//        myLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
-//
-//        let headerView = UIView()
-//        headerView.addSubview(myLabel)
-//
-//        return headerView
-//    }
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return data.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data[section].count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RegistrationTableViewCell", for: indexPath) as? RegistrationTableViewCell else { fatalError() }
-        cell.partLabel.text = data[indexPath.section]
+        cell.backgroundColor = view.backgroundColor
+        cell.storeTextField.text = textField.text
+        
         return cell
     }
     

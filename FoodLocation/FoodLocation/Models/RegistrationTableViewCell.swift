@@ -9,8 +9,11 @@ import UIKit
 
 class RegistrationTableViewCell: UITableViewCell {
     
-    let partLabel = UILabel()
-
+    let storeTextField = UITextField()
+    let locationTextField = UITextField()
+    let detailLocationTextField = UITextField()
+    let explanationTextField = UITextField()
+        
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setPart()
@@ -22,16 +25,23 @@ class RegistrationTableViewCell: UITableViewCell {
     }
     
     func setPart() {
-        self.contentView.addSubview(partLabel)
-        partLabel.textColor = .gray
-        partLabel.textAlignment = .left
-        partLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        partLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(storeTextField)
+        storeTextField.borderStyle = .roundedRect
+     
+        storeTextField.textAlignment = .left
+        storeTextField.textColor = UIColor.black
+//        storeTextField.autocapitalizationType = .none
+        storeTextField.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        storeTextField.placeholder = "가게 이름을 입력해주세요."
+        storeTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        
 
         
         NSLayoutConstraint.activate([
-            partLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
-            partLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            storeTextField.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
+            storeTextField.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
+            storeTextField.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
         ])
     }
 }

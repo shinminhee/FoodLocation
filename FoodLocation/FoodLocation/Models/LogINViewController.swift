@@ -6,21 +6,39 @@
 //
 
 import UIKit
+import Firebase
+import GoogleSignIn
 
 class LogINViewController: UIViewController {
 
     let backgroundView = UIView()
     let logInLabel = UILabel()
     let closeButton = UIImageView()
+    let googleLoginButton = GIDSignInButton()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance().signIn()
         setUI()
+        configureUI()
         
-
+        
     }
+    
+    private func configureUI() {
+          view.addSubview(googleLoginButton)
+          googleLoginButton.translatesAutoresizingMaskIntoConstraints = false
+
+          NSLayoutConstraint.activate([
+              googleLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+              googleLoginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            googleLoginButton.widthAnchor.constraint(equalToConstant: 300)
+          ])
+      }
+  
     
     func setUI() {
         view.addSubview(backgroundView)

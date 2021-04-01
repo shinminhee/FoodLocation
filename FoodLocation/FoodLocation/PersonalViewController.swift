@@ -11,17 +11,15 @@ class PersonalViewController: UIViewController {
     
     let backgroundView = UIView()
     let logInLabel = UILabel()
-    let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(settingButton(_:)))
     
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-       
-        self.navigationItem.rightBarButtonItem = rightBarButtonItem
-        
-        rightBarButtonItem.isEnabled = false
+        let rightBarButtonItem = UIBarButtonItem(image: (UIImage(systemName: "gearshape")), style: UIBarButtonItem.Style.plain, target: self, action: #selector(settingButton(_:)))
+        navigationItem.rightBarButtonItem = rightBarButtonItem
+//        rightBarButtonItem.isEnabled = true
         setUI()
         
 
@@ -74,9 +72,9 @@ class PersonalViewController: UIViewController {
     
     @objc
     func settingButton(_ sender: UIBarButtonItem) {
-        let settingVC = SettingViewController()
-        settingVC.modalPresentationStyle = .fullScreen
-        self.navigationController?.pushViewController(settingVC, animated: true)
+//        let settingVC = SettingViewController()
+//        settingVC.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(SettingViewController(), animated: true)
         
     }
  
