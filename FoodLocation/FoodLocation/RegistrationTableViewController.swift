@@ -15,18 +15,19 @@ class RegistrationTableViewController: UIViewController {
     let menuTableView = UITableView(frame: .zero, style: .grouped)
     let data = ["가게 이름", "위치", "메뉴", "맛/수량/가격 \n상세설명"]
     let textField = UITextField()
+    let Button = UIButton()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
         menuTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         setUI()
         setTableView()
         
         
     }
-
+    
     
     func setUI() {
         view.addSubview(backgroundView)
@@ -78,18 +79,18 @@ class RegistrationTableViewController: UIViewController {
     func setTableView() {
         view.addSubview(menuTableView)
         menuTableView.translatesAutoresizingMaskIntoConstraints = false
-    
+        
         menuTableView.topAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
         menuTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         menuTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         menuTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-//        menuTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        //        menuTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
-//        menuTableView.backgroundColor = .red
+        //        menuTableView.backgroundColor = .red
         menuTableView.dataSource = self
         menuTableView.register(RegistrationTableViewCell.self, forCellReuseIdentifier: "RegistrationTableViewCell")
         menuTableView.rowHeight = 50
-//        menuTableView.separatorInset.right = 20 // 셀 나눠주는 선 끝부분 공백
+        //        menuTableView.separatorInset.right = 20 // 셀 나눠주는 선 끝부분 공백
         
         
     }
@@ -112,18 +113,44 @@ extension RegistrationTableViewController: UITableViewDataSource {
         return "\(data[section])"
         
     }
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
+        
         return data.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //        switch data {
+        //        case ["가게 이름"]:
+        //            return 1
+        //        case ["위치"]:
+        //            return 2
+        //        case ["메뉴"]:
+        //            return 6
+        //        case ["맛/수량/가격 \n상세설명"]:
+        //            return 1
+        //        default:
+        //            break
+        //        }
         return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RegistrationTableViewCell", for: indexPath) as? RegistrationTableViewCell else { fatalError() }
         cell.backgroundColor = view.backgroundColor
+        switch data {
+        case ["가게 이름"]:
+            cell.storeTextField.text = textField.text
+        case ["위치"]:
+            cell.locationTextField.text = textField.text
+            cell.locationButton = Button
+        case ["메뉴"]:
+            break
+        case ["맛/수량/가격 \n상세설명"]:
+            break
+        default:
+            break
+        }
         cell.storeTextField.text = textField.text
         
         return cell

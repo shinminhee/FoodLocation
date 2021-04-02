@@ -7,6 +7,9 @@ target 'FoodLocation' do
 
   # Pods for FoodLocation
   pod 'SnapKit', '~> 5.0.0'
+ 
+  # Pods for FoodLocation
+  pod 'NMapsMap'
 
    # Pods for SignInWithGoogle_Example
   pod 'Firebase/Analytics'

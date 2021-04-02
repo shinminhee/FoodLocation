@@ -7,6 +7,7 @@
 
 import MapKit
 import UIKit
+import NMapsMap
 
 class ViewController: UIViewController {
     
@@ -17,6 +18,7 @@ class ViewController: UIViewController {
     let searchViewImage = UIImageView()
     let searchViewLabel = UILabel()
     
+    
 
     
 
@@ -24,7 +26,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 //        mapView.showsUserLocation = true
 //        reRegion()
-        setUI()
+//        setUI()
+        let mapView = NMFMapView(frame: view.frame)
+        view.addSubview(mapView)
         setSearchView()
 //        addAnnotation()
 //        setupLocationManager()
@@ -141,13 +145,8 @@ class ViewController: UIViewController {
 extension ViewController {
     private func setUI() {
         view.addSubview(mapView)
-        mapView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-          mapView.topAnchor.constraint(equalTo: view.topAnchor),
-          mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-          mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-          mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        
+        
     }
 }
 

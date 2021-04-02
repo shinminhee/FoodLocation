@@ -88,6 +88,7 @@ PODS:
     - nanopb/encode (= 2.30907.0)
   - nanopb/decode (2.30907.0)
   - nanopb/encode (2.30907.0)
+  - NMapsMap (3.11.0)
   - PromisesObjC (1.2.12)
   - SnapKit (5.0.1)
 
@@ -95,6 +96,7 @@ DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Auth
   - GoogleSignIn
+  - NMapsMap
   - SnapKit (~> 5.0.0)
 
 SPEC REPOS:
@@ -113,6 +115,7 @@ SPEC REPOS:
     - GTMAppAuth
     - GTMSessionFetcher
     - nanopb
+    - NMapsMap
     - PromisesObjC
     - SnapKit
 
@@ -131,9 +134,10 @@ SPEC CHECKSUMS:
   GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
+  NMapsMap: e6dbea85c2c195c7532deb637a5e90fd70f94fed
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: d0f0c9318acb48eebbed64b2aee44144babd6ee0
+PODFILE CHECKSUM: 145dc726d6da087c5ac463ac1ce1166fd8df2d33
 
 COCOAPODS: 1.10.1
