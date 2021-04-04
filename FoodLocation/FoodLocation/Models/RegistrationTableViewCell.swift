@@ -17,7 +17,7 @@ class RegistrationTableViewCell: UITableViewCell {
         
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setLocationTextField()
+//        setLocationTextField()
         setStoreTextField()
         
     }
@@ -32,7 +32,7 @@ class RegistrationTableViewCell: UITableViewCell {
      
         storeTextField.textAlignment = .left
         storeTextField.textColor = UIColor.black
-//        storeTextField.autocapitalizationType = .none
+        storeTextField.autocapitalizationType = .none
         storeTextField.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         storeTextField.placeholder = "가게 이름을 입력해주세요."
         storeTextField.translatesAutoresizingMaskIntoConstraints = false

@@ -24,8 +24,14 @@ class PersonalViewController: UIViewController {
     let regiStoreView = UIView()
     let commentView = UIView()
     
+    let plusStore = UILabel()
+    let plusComment = UILabel()
+    let plusFavorite = UILabel()
     
-    
+    let storeImageText = ["store1", "store2", "store3", "store4", "store5", "store6", "store7", "store8", "store8", "store10", "store11", "store12"]
+    let colors: [UIColor] = [UIColor.systemRed, UIColor.systemBlue, UIColor.systemPink, UIColor.systemYellow, UIColor.systemIndigo, UIColor.systemRed, UIColor.systemBlue, UIColor.systemPink, UIColor.systemYellow, UIColor.systemIndigo]
+    let collectionLayout = UICollectionViewFlowLayout() //collectionviewlayout 잡기위함
+    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionLayout)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +42,8 @@ class PersonalViewController: UIViewController {
         setLike()
         setRegistration()
         setComment()
+        setCollection()
+        setLayout()
         
         
     }
@@ -44,6 +52,18 @@ class PersonalViewController: UIViewController {
         let logInVC = LogINViewController()
         logInVC.modalPresentationStyle = .fullScreen
         present(logInVC, animated: true, completion: nil)
+    }
+    @objc func plusStore(_ sender: UITapGestureRecognizer) {
+        let logInVC = MyStoreViewController()
+        self.navigationController?.pushViewController(logInVC, animated: true)
+    }
+    @objc func plusComment(_ sender: UITapGestureRecognizer) {
+        let logInVC = MyCommentViewController()
+        self.navigationController?.pushViewController(logInVC, animated: true)
+    }
+    @objc func plusFavorite(_ sender: UITapGestureRecognizer) {
+        let logInVC = MyFavoriteViewController()
+        self.navigationController?.pushViewController(logInVC, animated: true)
     }
     
     @objc
@@ -95,7 +115,7 @@ extension PersonalViewController {
     }
     
     func setLike() {
-        [likeStoreLabel, likeStoreView, likeStoreViewLabel].forEach { (view) in
+        [likeStoreLabel, likeStoreView, likeStoreViewLabel, plusFavorite].forEach { (view) in
             self.view.addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -104,6 +124,11 @@ extension PersonalViewController {
             likeStoreLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             likeStoreLabel.topAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: 20),
             likeStoreLabel.widthAnchor.constraint(equalToConstant: 200),
+            
+            plusFavorite.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            plusFavorite.topAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: 20),
+            plusFavorite.widthAnchor.constraint(equalToConstant: 60),
+            
             
             likeStoreView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             likeStoreView.topAnchor.constraint(equalTo:likeStoreLabel.bottomAnchor, constant: 20),
@@ -117,6 +142,16 @@ extension PersonalViewController {
         likeStoreLabel.text = "내가 찜한 가게"
         likeStoreLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         
+        let searchBarTaped = UITapGestureRecognizer(target: self, action: #selector(plusFavorite(_:)))
+        searchBarTaped.numberOfTouchesRequired = 1
+        searchBarTaped.numberOfTapsRequired = 1
+        plusFavorite.addGestureRecognizer(searchBarTaped)
+        plusFavorite.isUserInteractionEnabled = true
+        plusFavorite.text = "더보기 >"
+        plusFavorite.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        plusFavorite.textColor = .lightGray
+        plusFavorite.textAlignment = .left
+        
         likeStoreView.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
         
         likeStoreViewLabel.text = "내가 찜한 가게가 없어요."
@@ -127,7 +162,7 @@ extension PersonalViewController {
     }
     func setRegistration() {
         
-        [regiStoreView, regiStoreLabel, regiStoreViewLabel].forEach { (view) in
+        [regiStoreView, regiStoreLabel, regiStoreViewLabel, plusStore].forEach { (view) in
             self.view.addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -136,6 +171,10 @@ extension PersonalViewController {
             regiStoreLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             regiStoreLabel.topAnchor.constraint(equalTo: likeStoreView.bottomAnchor, constant: 20),
             regiStoreLabel.widthAnchor.constraint(equalToConstant: 200),
+            
+            plusStore.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            plusStore.topAnchor.constraint(equalTo: likeStoreView.bottomAnchor, constant: 20),
+            plusStore.widthAnchor.constraint(equalToConstant: 60),
             
             regiStoreView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             regiStoreView.topAnchor.constraint(equalTo:regiStoreLabel.bottomAnchor, constant: 20),
@@ -149,6 +188,16 @@ extension PersonalViewController {
         regiStoreLabel.text = "내가 등록한 가게"
         regiStoreLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         
+        let searchBarTaped = UITapGestureRecognizer(target: self, action: #selector(plusStore(_:)))
+        searchBarTaped.numberOfTouchesRequired = 1
+        searchBarTaped.numberOfTapsRequired = 1
+        plusStore.addGestureRecognizer(searchBarTaped)
+        plusStore.isUserInteractionEnabled = true
+        plusStore.text = "더보기 >"
+        plusStore.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        plusStore.textColor = .lightGray
+        plusStore.textAlignment = .left
+        
         regiStoreView.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
         
         regiStoreViewLabel.text = "내가 등록한 가게가 없어요."
@@ -158,7 +207,7 @@ extension PersonalViewController {
     
     func setComment() {
         
-        [commentLabel, commentView, commentViewLabel].forEach { (view) in
+        [commentLabel, commentView, commentViewLabel, plusComment].forEach { (view) in
             self.view.addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -168,6 +217,10 @@ extension PersonalViewController {
             commentLabel.topAnchor.constraint(equalTo: regiStoreView.bottomAnchor, constant: 20),
             commentLabel.widthAnchor.constraint(equalToConstant: 200),
             
+            plusComment.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            plusComment.topAnchor.constraint(equalTo: regiStoreView.bottomAnchor, constant: 20),
+            plusComment.widthAnchor.constraint(equalToConstant: 60),
+        
             commentView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             commentView.topAnchor.constraint(equalTo:commentLabel.bottomAnchor, constant: 20),
             commentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -180,6 +233,17 @@ extension PersonalViewController {
         commentLabel.text = "내가 쓴 댓글"
         commentLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         
+        let searchBarTaped = UITapGestureRecognizer(target: self, action: #selector(plusComment(_:)))
+        searchBarTaped.numberOfTouchesRequired = 1
+        searchBarTaped.numberOfTapsRequired = 1
+        plusComment.addGestureRecognizer(searchBarTaped)
+        plusComment.isUserInteractionEnabled = true
+        plusComment.text = "더보기 >"
+        plusComment.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        plusComment.textColor = .lightGray
+        plusComment.textAlignment = .left
+        
+        
         commentView.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
         
         commentViewLabel.text = "내가 쓴 댓글이 없어요."
@@ -188,4 +252,46 @@ extension PersonalViewController {
         
     }
     
+    func setLayout() {
+      
+        view.addSubview(collectionView)
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+        collectionView.topAnchor.constraint(equalTo: likeStoreView.topAnchor),
+        collectionView.leadingAnchor.constraint(equalTo: likeStoreView.leadingAnchor),
+        collectionView.trailingAnchor.constraint(equalTo:  likeStoreView.trailingAnchor),
+        collectionView.heightAnchor.constraint(equalTo:  likeStoreView.heightAnchor)
+        ])
+        
+        collectionLayout.scrollDirection = .horizontal
+        collectionLayout.minimumInteritemSpacing = 10
+        collectionLayout.minimumLineSpacing = 10
+        collectionLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        collectionLayout.itemSize = CGSize(width: 120, height: 80)
+    }
+    
+    func setCollection() {
+        collectionView.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
+        collectionView.dataSource = self
+        collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+    }
+}
+
+extension PersonalViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return colors.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let collectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CustomCollectionViewCell
+//        collectionCell.backgroundColor = colors[indexPath.item]
+        collectionCell.storeImageVIew.image = UIImage(named: storeImageText[indexPath.item])
+        collectionCell.clipsToBounds = true
+        collectionCell.layer.cornerRadius = 15
+
+        
+        return collectionCell
+    }
+  
 }

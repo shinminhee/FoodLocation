@@ -7,15 +7,26 @@
 
 import UIKit
 
+class Store {
+    var storeName: String?
+    var detailName: [String]?
+    
+    init(storeName: String, detailName: [String]) {
+        self.storeName = storeName
+        self.detailName = detailName
+    }
+}
+
 class RegistrationTableViewController: UIViewController {
     
     let backgroundView = UIView()
     let logInLabel = UILabel()
     let closeButton = UIImageView()
-    let menuTableView = UITableView(frame: .zero, style: .grouped)
-    let data = ["가게 이름", "위치", "메뉴", "맛/수량/가격 \n상세설명"]
+    let menuTableView = UITableView()
+//    let data = ["가게 이름", "위치", "메뉴", "맛/수량/가격 \n상세설명"]
     let textField = UITextField()
     let Button = UIButton()
+    var store = [Store]()
     
     
     override func viewDidLoad() {
@@ -25,7 +36,10 @@ class RegistrationTableViewController: UIViewController {
         setUI()
         setTableView()
         
-        
+        store.append(Store.init(storeName: "가게 이름", detailName: ["1"]))
+        store.append(Store.init(storeName: "위치", detailName: ["1", "2"]))
+        store.append(Store.init(storeName: "메뉴", detailName: ["1", "2", "3"]))
+        store.append(Store.init(storeName: "맛/수량/가격 \n상세설명", detailName: ["1", "2"]))
     }
     
     
@@ -104,57 +118,52 @@ class RegistrationTableViewController: UIViewController {
 }
 
 extension RegistrationTableViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        let myLabel = UILabel()
-        myLabel.font = UIFont.boldSystemFont(ofSize: 30)
-        myLabel.text = self.data[section]
-        
-        return "\(data[section])"
-        
-    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return data.count
+        return store.count
     }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //        switch data {
-        //        case ["가게 이름"]:
-        //            return 1
-        //        case ["위치"]:
-        //            return 2
-        //        case ["메뉴"]:
-        //            return 6
-        //        case ["맛/수량/가격 \n상세설명"]:
-        //            return 1
-        //        default:
-        //            break
-        //        }
-        return 1
+        return store[section].detailName?.count ?? 0
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RegistrationTableViewCell", for: indexPath) as? RegistrationTableViewCell else { fatalError() }
         cell.backgroundColor = view.backgroundColor
-        switch data {
-        case ["가게 이름"]:
-            cell.storeTextField.text = textField.text
-        case ["위치"]:
-            cell.locationTextField.text = textField.text
-            cell.locationButton = Button
-        case ["메뉴"]:
-            break
-        case ["맛/수량/가격 \n상세설명"]:
-            break
-        default:
-            break
-        }
         cell.storeTextField.text = textField.text
-        
-        return cell
+
+//        switch Store.{
+//        case ["가게 이름"]:
+//            cell.storeTextField.text = textField.text
+//        case ["위치"]:
+//            cell.locationTextField.text = textField.text
+//        case ["메뉴"]:
+//            cell.storeTextField.text = textField.text
+//        case ["맛/수량/가격 \n상세설명"]:
+//            cell.locationTextField.text = textField.text
+//        default:
+//            break
+          return cell
     }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    
+        return store[section].storeName
+//        let myLabel = UILabel()
+//        myLabel.font = UIFont.boldSystemFont(ofSize: 30)
+//        myLabel.text = self.data[section]
+//
+//        return "\(data[section])"
+        
+    }
+    func tableView(_ tableView: UITableView, viewForHeaterInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height:40))
+        view.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
+        let lbl = UILabel(frame: CGRect(x: 15, y: 0, width: view.frame.width - 15, height: 40))
+        lbl.text = store[section].storeName
+        lbl.numberOfLines = 0
+        view.addSubview(lbl)
+        return view
+    }
+    
+    
     
 }
 

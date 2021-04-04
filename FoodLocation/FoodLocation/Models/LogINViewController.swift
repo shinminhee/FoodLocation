@@ -15,7 +15,7 @@ class LogINViewController: UIViewController {
     let logInLabel = UILabel()
     let closeButton = UIImageView()
     let googleLoginButton = GIDSignInButton()
-    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +27,7 @@ class LogINViewController: UIViewController {
         
         
     }
+
     
     private func configureUI() {
           view.addSubview(googleLoginButton)
