@@ -33,5 +33,5 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
 }
 
-    
+
 

@@ -10,13 +10,13 @@ import Firebase
 import GoogleSignIn
 
 class LogINViewController: UIViewController {
-
+    
     let backgroundView = UIView()
     let logInLabel = UILabel()
     let closeButton = UIImageView()
     let googleLoginButton = GIDSignInButton()
-
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -27,19 +27,25 @@ class LogINViewController: UIViewController {
         
         
     }
-
     
-    private func configureUI() {
-          view.addSubview(googleLoginButton)
-          googleLoginButton.translatesAutoresizingMaskIntoConstraints = false
+    @objc
+    func closeTaped(_ sender: UITapGestureRecognizer) {
+        dismiss(animated: true, completion: nil)
+    }
+}
 
-          NSLayoutConstraint.activate([
-              googleLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-              googleLoginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+extension LogINViewController {
+    private func configureUI() {
+        view.addSubview(googleLoginButton)
+        googleLoginButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            googleLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            googleLoginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             googleLoginButton.widthAnchor.constraint(equalToConstant: 300)
-          ])
-      }
-  
+        ])
+    }
+    
     
     func setUI() {
         view.addSubview(backgroundView)
@@ -47,25 +53,25 @@ class LogINViewController: UIViewController {
             self.view.addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false
         }
+        
+        NSLayoutConstraint.activate([
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundView.heightAnchor.constraint(equalToConstant: 100),
             
-            NSLayoutConstraint.activate([
-                backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
-                backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                backgroundView.heightAnchor.constraint(equalToConstant: 100),
-                
-                logInLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-                logInLabel.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -10),
-                logInLabel.heightAnchor.constraint(equalToConstant: 30),
-                logInLabel.widthAnchor.constraint(equalToConstant: 100),
-                
-                closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-                closeButton.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -10),
-                closeButton.heightAnchor.constraint(equalToConstant: 30),
-                closeButton.widthAnchor.constraint(equalToConstant: 30)
-                
-            ])
+            logInLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+            logInLabel.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -10),
+            logInLabel.heightAnchor.constraint(equalToConstant: 30),
+            logInLabel.widthAnchor.constraint(equalToConstant: 100),
             
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            closeButton.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -10),
+            closeButton.heightAnchor.constraint(equalToConstant: 30),
+            closeButton.widthAnchor.constraint(equalToConstant: 30)
+            
+        ])
+        
         backgroundView.backgroundColor = .white
         backgroundView.layer.cornerRadius = 20
         backgroundView.layer.shadowColor = UIColor.gray.cgColor // 색깔
@@ -74,7 +80,7 @@ class LogINViewController: UIViewController {
         backgroundView.layer.shadowRadius = 5 // 반경
         backgroundView.layer.shadowOpacity = 0.3 // alpha값
         
-            
+        
         logInLabel.text = "로그인"
         logInLabel.textAlignment = .center
         logInLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -85,14 +91,6 @@ class LogINViewController: UIViewController {
         searchBarTaped.numberOfTapsRequired = 1
         closeButton.addGestureRecognizer(searchBarTaped)
         closeButton.isUserInteractionEnabled = true
-
     }
-    
-    @objc
-    func closeTaped(_ sender: UITapGestureRecognizer) {
-       dismiss(animated: true, completion: nil)
-    }
- 
-
 }
 

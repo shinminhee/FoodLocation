@@ -28,7 +28,7 @@ class PersonalViewController: UIViewController {
     let plusComment = UILabel()
     let plusFavorite = UILabel()
     
-    let storeImageText = ["store1", "store2", "store3", "store4", "store5", "store6", "store7", "store8", "store8", "store10", "store11", "store12"]
+    let storeImageText = ["store1", "store2", "store3", "store4", "store5", "store6", "store7", "store8", "store9", "store10", "store11", "store12"]
     let colors: [UIColor] = [UIColor.systemRed, UIColor.systemBlue, UIColor.systemPink, UIColor.systemYellow, UIColor.systemIndigo, UIColor.systemRed, UIColor.systemBlue, UIColor.systemPink, UIColor.systemYellow, UIColor.systemIndigo]
     let collectionLayout = UICollectionViewFlowLayout() //collectionviewlayout 잡기위함
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionLayout)
@@ -65,14 +65,11 @@ class PersonalViewController: UIViewController {
         let logInVC = MyFavoriteViewController()
         self.navigationController?.pushViewController(logInVC, animated: true)
     }
-    
     @objc
     func settingButton(_ sender: UIBarButtonItem) {
         self.navigationController?.pushViewController(SettingViewController(), animated: true)
         
     }
-    
-    
 }
 
 extension PersonalViewController {

@@ -20,7 +20,14 @@ class StoreViewController: UIViewController {
         setUI()
 
     }
-    
+    @objc func logIn(_ sender: UIButton) {
+        let logInVC = RegistrationTableViewController()
+        logInVC.modalPresentationStyle = .fullScreen
+        present(logInVC, animated: true, completion: nil)
+    }
+}
+
+extension StoreViewController {
     func setUI() {
         [storeImage, registrationLabel, smallLabel, registrationButton].forEach { (view) in
             self.view.addSubview(view)
@@ -75,12 +82,4 @@ class StoreViewController: UIViewController {
         registrationButton.layer.shadowOpacity = 0.3
     
     }
-    
-    @objc func logIn(_ sender: UIButton) {
-        let logInVC = RegistrationTableViewController()
-        logInVC.modalPresentationStyle = .fullScreen
-        present(logInVC, animated: true, completion: nil)
-    }
-    
-
 }

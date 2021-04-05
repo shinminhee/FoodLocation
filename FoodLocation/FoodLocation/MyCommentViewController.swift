@@ -8,35 +8,37 @@
 import UIKit
 
 class MyCommentViewController: UIViewController {
-
+    
     let backgroundView = UIView()
     let logInLabel = UILabel()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
         setUI()
     }
-    
+}
+
+extension MyCommentViewController {
     func setUI() {
         view.addSubview(backgroundView)
         [backgroundView, logInLabel].forEach { (view) in
             self.view.addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false
         }
+        
+        NSLayoutConstraint.activate([
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundView.heightAnchor.constraint(equalToConstant: 100),
             
-            NSLayoutConstraint.activate([
-                backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
-                backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                backgroundView.heightAnchor.constraint(equalToConstant: 100),
-                
-                logInLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-                logInLabel.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -10),
-                logInLabel.heightAnchor.constraint(equalToConstant: 30),
-                logInLabel.widthAnchor.constraint(equalToConstant: 100),
-            ])
-            
+            logInLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+            logInLabel.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -10),
+            logInLabel.heightAnchor.constraint(equalToConstant: 30),
+            logInLabel.widthAnchor.constraint(equalToConstant: 100),
+        ])
+        
         backgroundView.backgroundColor = .white
         backgroundView.layer.cornerRadius = 20
         backgroundView.layer.shadowColor = UIColor.gray.cgColor // 색깔
@@ -45,11 +47,10 @@ class MyCommentViewController: UIViewController {
         backgroundView.layer.shadowRadius = 5 // 반경
         backgroundView.layer.shadowOpacity = 0.3 // alpha값
         
-            
+        
         logInLabel.text = "내가 쓴 댓글"
         logInLabel.textAlignment = .center
         logInLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
- 
+        
     }
-
 }

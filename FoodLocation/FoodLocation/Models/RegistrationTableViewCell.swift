@@ -14,14 +14,15 @@ class RegistrationTableViewCell: UITableViewCell {
     let detailLocationTextField = UITextField()
     let explanationTextField = UITextField()
     var locationButton = UIButton()
-        
+    let okButton = UIButton()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-//        setLocationTextField()
+        //        setLocationTextField()
         setStoreTextField()
         
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -29,7 +30,7 @@ class RegistrationTableViewCell: UITableViewCell {
     func setStoreTextField() {
         self.contentView.addSubview(storeTextField)
         storeTextField.borderStyle = .roundedRect
-     
+        
         storeTextField.textAlignment = .left
         storeTextField.textColor = UIColor.black
         storeTextField.autocapitalizationType = .none
@@ -44,7 +45,7 @@ class RegistrationTableViewCell: UITableViewCell {
             storeTextField.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
-
+    
     func setLocationTextField() {
         [locationTextField, locationButton, detailLocationTextField].forEach { (view) in
             self.contentView.addSubview(view)

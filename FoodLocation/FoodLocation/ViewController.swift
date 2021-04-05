@@ -17,32 +17,29 @@ class ViewController: UIViewController {
     let searchViewBackImage = UIImageView()
     let searchViewImage = UIImageView()
     let searchViewLabel = UILabel()
-    
-    
-
+    let button = UIButton()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
-//        mapView.showsUserLocation = true
-//        reRegion()
+        //        mapView.showsUserLocation = true
+        //        reRegion()
         setUI()
         setSearchView()
-//        addAnnotation()
+        //        addAnnotation()
         setupLocationManager()
         setCamera()
         setMarker()
     }
     
     func setCamera() {
-           
-       let camPosition =  NMGLatLng(lat: 37.5670135, lng: 126.9783740)
-       let cameraPosition = mapView.cameraPosition
-
-       let cameraUpdate = NMFCameraUpdate(scrollTo: camPosition)
-       mapView.moveCamera(cameraUpdate)
-   }
+        
+        let camPosition =  NMGLatLng(lat: 37.5670135, lng: 126.9783740)
+//        let cameraPosition = mapView.cameraPosition
+        let cameraUpdate = NMFCameraUpdate(scrollTo: camPosition)
+        mapView.moveCamera(cameraUpdate)
+    }
     
     func setMarker() {
         let marker = NMFMarker()
@@ -63,11 +60,11 @@ class ViewController: UIViewController {
         infoWindow.open(with: marker)
     }
     
-   
-  
+    
+    
     
     func setupLocationManager() {
-//        locationManager.delegate = self
+        //        locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization() //권한 요청
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = kCLDistanceFilterNone
@@ -75,30 +72,30 @@ class ViewController: UIViewController {
     }
     
     // 내 위치 잡을때
-//    func reRegion() {
-//        let region = MKCoordinateRegion(center: mapView.userLocation.coordinate, latitudinalMeters: 10, longitudinalMeters: 10)
-//        mapView.setRegion(region, animated: true)
-//    }
-
-//    맵에서 위치 표시하는 화살표를 어노테이션 이라고 함
-//    func addAnnotation() {
-//        let annotation = MKPointAnnotation()
-//        //위도, 경도
-//        annotation.coordinate = CLLocationCoordinate2D(latitude: 37.85, longitude: -122.4194)
-//        //내 위치 찍을때
-//        annotation.coordinate = mapView.userLocation.coordinate
-//        annotation.title = "shin.mini"
-//        annotation.subtitle = "I'm here"
-//        mapView.addAnnotation(annotation)
-//
-//    }
+    //    func reRegion() {
+    //        let region = MKCoordinateRegion(center: mapView.userLocation.coordinate, latitudinalMeters: 10, longitudinalMeters: 10)
+    //        mapView.setRegion(region, animated: true)
+    //    }
+    
+    //    맵에서 위치 표시하는 화살표를 어노테이션 이라고 함
+    //    func addAnnotation() {
+    //        let annotation = MKPointAnnotation()
+    //        //위도, 경도
+    //        annotation.coordinate = CLLocationCoordinate2D(latitude: 37.85, longitude: -122.4194)
+    //        //내 위치 찍을때
+    //        annotation.coordinate = mapView.userLocation.coordinate
+    //        annotation.title = "shin.mini"
+    //        annotation.subtitle = "I'm here"
+    //        mapView.addAnnotation(annotation)
+    //
+    //    }
     
     @objc
     func searchBarTaped(_ sender: UITapGestureRecognizer) {
-     let locationVC = LocationViewController()
+        let locationVC = LocationViewController()
         self.present(locationVC, animated: true, completion: nil)
         
-        }
+    }
 }
 
 //extension ViewController: CLLocationManagerDelegate {
@@ -126,15 +123,28 @@ class ViewController: UIViewController {
 extension ViewController {
     private func setUI() {
         view.addSubview(mapView)
+        view.addSubview(button)
         mapView.translatesAutoresizingMaskIntoConstraints = false
-        
+        mapView.positionMode = .direction
+        mapView.positionMode = .compass
         NSLayoutConstraint.activate([
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             mapView.topAnchor.constraint(equalTo: view.topAnchor),
             mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        
+            
         ])
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            button.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            mapView.topAnchor.constraint(equalTo: view.topAnchor),
+            mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            
+        ])
+        
+        
     }
     
     func setSearchView() {
@@ -169,14 +179,14 @@ extension ViewController {
         
         searchView.backgroundColor = .white
         let searchBarTaped = UITapGestureRecognizer(target: self, action: #selector(searchBarTaped(_:)))
-//        self.searchView.gestureRecognizers = [searchBarTaped]
+        //        self.searchView.gestureRecognizers = [searchBarTaped]
         searchBarTaped.numberOfTouchesRequired = 1
         searchBarTaped.numberOfTapsRequired = 1
         searchView.addGestureRecognizer(searchBarTaped)
         searchView.isUserInteractionEnabled = true
         
         searchViewLabel.text = "어디에서 찾으세요?"
-//        searchViewLabel.textAlignment = .left
+        //        searchViewLabel.textAlignment = .left
         searchViewLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         
         searchViewImage.image = UIImage(systemName: "magnifyingglass")?.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)

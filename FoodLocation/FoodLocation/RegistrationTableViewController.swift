@@ -22,7 +22,7 @@ class RegistrationTableViewController: UIViewController {
     let backgroundView = UIView()
     let logInLabel = UILabel()
     let closeButton = UIImageView()
-    let menuTableView = UITableView()
+    let menuTableView = UITableView(frame: .zero, style: .grouped)
 //    let data = ["가게 이름", "위치", "메뉴", "맛/수량/가격 \n상세설명"]
     let textField = UITextField()
     let Button = UIButton()
@@ -42,6 +42,77 @@ class RegistrationTableViewController: UIViewController {
         store.append(Store.init(storeName: "맛/수량/가격 \n상세설명", detailName: ["1", "2"]))
     }
     
+    @objc
+    func closeTaped(_ sender: UITapGestureRecognizer) {
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+extension RegistrationTableViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return store.count
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return store[section].detailName?.count ?? 0
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RegistrationTableViewCell", for: indexPath) as? RegistrationTableViewCell else { fatalError() }
+        cell.backgroundColor = view.backgroundColor
+        cell.storeTextField.text = textField.text
+      
+//        switch Store.{
+//        case ["가게 이름"]:
+//            cell.storeTextField.text = textField.text
+//        case ["위치"]:
+//            cell.locationTextField.text = textField.text
+//        case ["메뉴"]:
+//            cell.storeTextField.text = textField.text
+//        case ["맛/수량/가격 \n상세설명"]:
+//            cell.locationTextField.text = textField.text
+//        default:
+//            break
+          return cell
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    
+        return store[section].storeName
+//        let myLabel = UILabel()
+//        myLabel.font = UIFont.boldSystemFont(ofSize: 30)
+//        myLabel.text = self.data[section]
+//
+//        return "\(data[section])"
+        
+    }
+    private func tableView(_ tableView: UITableView, viewForHeaterInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height:40))
+        view.backgroundColor = .red
+//        view.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
+        let lbl = UILabel(frame: CGRect(x: 15, y: 0, width: view.frame.width - 15, height: 40))
+        lbl.text = store[section].storeName
+        lbl.numberOfLines = 0
+        view.addSubview(lbl)
+        return view
+    }
+}
+
+extension RegistrationTableViewController {
+    
+    func setTableView() {
+        view.addSubview(menuTableView)
+        menuTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            menuTableView.topAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: 10),
+        menuTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        menuTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        menuTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        menuTableView.dataSource = self
+        menuTableView.register(RegistrationTableViewCell.self, forCellReuseIdentifier: "RegistrationTableViewCell")
+        menuTableView.rowHeight = 50
+        //        menuTableView.separatorInset.right = 20 // 셀 나눠주는 선 끝부분 공백
+    }
     
     func setUI() {
         view.addSubview(backgroundView)
@@ -89,81 +160,5 @@ class RegistrationTableViewController: UIViewController {
         closeButton.isUserInteractionEnabled = true
         
     }
-    
-    func setTableView() {
-        view.addSubview(menuTableView)
-        menuTableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        menuTableView.topAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
-        menuTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        menuTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        menuTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        //        menuTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        
-        //        menuTableView.backgroundColor = .red
-        menuTableView.dataSource = self
-        menuTableView.register(RegistrationTableViewCell.self, forCellReuseIdentifier: "RegistrationTableViewCell")
-        menuTableView.rowHeight = 50
-        //        menuTableView.separatorInset.right = 20 // 셀 나눠주는 선 끝부분 공백
-        
-        
-    }
-    
-    @objc
-    func closeTaped(_ sender: UITapGestureRecognizer) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    
-}
-
-extension RegistrationTableViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return store.count
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return store[section].detailName?.count ?? 0
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RegistrationTableViewCell", for: indexPath) as? RegistrationTableViewCell else { fatalError() }
-        cell.backgroundColor = view.backgroundColor
-        cell.storeTextField.text = textField.text
-
-//        switch Store.{
-//        case ["가게 이름"]:
-//            cell.storeTextField.text = textField.text
-//        case ["위치"]:
-//            cell.locationTextField.text = textField.text
-//        case ["메뉴"]:
-//            cell.storeTextField.text = textField.text
-//        case ["맛/수량/가격 \n상세설명"]:
-//            cell.locationTextField.text = textField.text
-//        default:
-//            break
-          return cell
-    }
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    
-        return store[section].storeName
-//        let myLabel = UILabel()
-//        myLabel.font = UIFont.boldSystemFont(ofSize: 30)
-//        myLabel.text = self.data[section]
-//
-//        return "\(data[section])"
-        
-    }
-    func tableView(_ tableView: UITableView, viewForHeaterInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height:40))
-        view.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
-        let lbl = UILabel(frame: CGRect(x: 15, y: 0, width: view.frame.width - 15, height: 40))
-        lbl.text = store[section].storeName
-        lbl.numberOfLines = 0
-        view.addSubview(lbl)
-        return view
-    }
-    
-    
-    
 }
 
