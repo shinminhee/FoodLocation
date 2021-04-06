@@ -15,6 +15,8 @@
 		5E4E02EF2619CDFF001FF770 /* MyStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E02EE2619CDFF001FF770 /* MyStoreViewController.swift */; };
 		5E4E02F22619CE13001FF770 /* MyCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E02F12619CE13001FF770 /* MyCommentViewController.swift */; };
 		5E4E02F52619D166001FF770 /* MyFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E02F42619D166001FF770 /* MyFavoriteViewController.swift */; };
+		5E4E0323261C1F63001FF770 /* RegistrationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E0322261C1F63001FF770 /* RegistrationCollectionViewCell.swift */; };
+		5E4E0326261C59BA001FF770 /* NaverMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E0325261C59BA001FF770 /* NaverMapViewController.swift */; };
 		5E808423260C0B2400BA75FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E808422260C0B2400BA75FB /* AppDelegate.swift */; };
 		5E808425260C0B2400BA75FB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E808424260C0B2400BA75FB /* SceneDelegate.swift */; };
 		5E808427260C0B2400BA75FB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E808426260C0B2400BA75FB /* ViewController.swift */; };
@@ -37,6 +39,8 @@
 		5E4E02EE2619CDFF001FF770 /* MyStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoreViewController.swift; sourceTree = "<group>"; };
 		5E4E02F12619CE13001FF770 /* MyCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCommentViewController.swift; sourceTree = "<group>"; };
 		5E4E02F42619D166001FF770 /* MyFavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavoriteViewController.swift; sourceTree = "<group>"; };
+		5E4E0322261C1F63001FF770 /* RegistrationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCollectionViewCell.swift; sourceTree = "<group>"; };
+		5E4E0325261C59BA001FF770 /* NaverMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMapViewController.swift; sourceTree = "<group>"; };
 		5E80841F260C0B2400BA75FB /* FoodLocation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodLocation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E808422260C0B2400BA75FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E808424260C0B2400BA75FB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +104,7 @@
 				5E4E02F12619CE13001FF770 /* MyCommentViewController.swift */,
 				5E4E02F42619D166001FF770 /* MyFavoriteViewController.swift */,
 				5E4E0269260F2660001FF770 /* RegistrationTableViewController.swift */,
+				5E4E0325261C59BA001FF770 /* NaverMapViewController.swift */,
 				5E80842B260C0B2500BA75FB /* Assets.xcassets */,
 				5E80842D260C0B2500BA75FB /* LaunchScreen.storyboard */,
 				5E808430260C0B2500BA75FB /* Info.plist */,
@@ -128,6 +133,7 @@
 				5E80843C260C2EEB00BA75FB /* SearchView.swift */,
 				5E80844B260C665400BA75FB /* LogINViewController.swift */,
 				5E4E0266260F25DE001FF770 /* RegistrationTableViewCell.swift */,
+				5E4E0322261C1F63001FF770 /* RegistrationCollectionViewCell.swift */,
 				5E4E02EA2619C3DB001FF770 /* CustomCollectionViewCell.swift */,
 				5E808446260C4B9700BA75FB /* LocationViewController.swift */,
 			);
@@ -284,6 +290,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E808447260C4B9700BA75FB /* LocationViewController.swift in Sources */,
+				5E4E0323261C1F63001FF770 /* RegistrationCollectionViewCell.swift in Sources */,
+				5E4E0326261C59BA001FF770 /* NaverMapViewController.swift in Sources */,
 				5E808441260C43B200BA75FB /* StoreViewController.swift in Sources */,
 				5E80843D260C2EEB00BA75FB /* SearchView.swift in Sources */,
 				5E808427260C0B2400BA75FB /* ViewController.swift in Sources */,

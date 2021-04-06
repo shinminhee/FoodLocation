@@ -23,7 +23,6 @@ class RegistrationTableViewController: UIViewController {
     let logInLabel = UILabel()
     let closeButton = UIImageView()
     let menuTableView = UITableView(frame: .zero, style: .grouped)
-//    let data = ["가게 이름", "위치", "메뉴", "맛/수량/가격 \n상세설명"]
     let textField = UITextField()
     let Button = UIButton()
     var store = [Store]()
@@ -36,15 +35,22 @@ class RegistrationTableViewController: UIViewController {
         setUI()
         setTableView()
         
-        store.append(Store.init(storeName: "가게 이름", detailName: ["1"]))
-        store.append(Store.init(storeName: "위치", detailName: ["1", "2"]))
-        store.append(Store.init(storeName: "메뉴", detailName: ["1", "2", "3"]))
-        store.append(Store.init(storeName: "맛/수량/가격 \n상세설명", detailName: ["1", "2"]))
+        store.append(Store.init(storeName: "가게 이름", detailName: ["0"]))
+        store.append(Store.init(storeName: "위치", detailName: ["0", "1"]))
+        store.append(Store.init(storeName: "메뉴", detailName: ["0"]))
+        store.append(Store.init(storeName: "맛/수량/가격 \n상세설명", detailName: ["0"]))
+        store.append(Store.init(storeName: "", detailName: ["0"]))
     }
     
     @objc
     func closeTaped(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
+    }
+    @objc
+    func setLocationButton(_ sender: UIButton) {
+        let naverVC = NaverMapViewController()
+        self.navigationController?.pushViewController(naverVC, animated: true)
+        print(123)
     }
 }
 
@@ -58,60 +64,62 @@ extension RegistrationTableViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RegistrationTableViewCell", for: indexPath) as? RegistrationTableViewCell else { fatalError() }
+        switch indexPath {
+        case [0, 0]:
+            cell.setStoreTextField()
+        case [1, 0]:
+            cell.setLocationTextField()
+        case [1, 1]:
+            cell.setDetailLocationTextField()
+        case [2, 0]:
+            cell.setCollectionView()
+        case [3, 0]:
+            cell.setExplanationTextField()
+        case [4, 0]:
+            cell.setOkButton()
+        default:
+            return cell
+        }
+        cell.locationButton.addTarget(self, action: #selector(setLocationButton(_:)), for: .touchUpInside)
         cell.backgroundColor = view.backgroundColor
-        cell.storeTextField.text = textField.text
-      
-//        switch Store.{
-//        case ["가게 이름"]:
-//            cell.storeTextField.text = textField.text
-//        case ["위치"]:
-//            cell.locationTextField.text = textField.text
-//        case ["메뉴"]:
-//            cell.storeTextField.text = textField.text
-//        case ["맛/수량/가격 \n상세설명"]:
-//            cell.locationTextField.text = textField.text
-//        default:
-//            break
-          return cell
+        return cell
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    
-        return store[section].storeName
-//        let myLabel = UILabel()
-//        myLabel.font = UIFont.boldSystemFont(ofSize: 30)
-//        myLabel.text = self.data[section]
-//
-//        return "\(data[section])"
         
+        return store[section].storeName
     }
-    private func tableView(_ tableView: UITableView, viewForHeaterInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height:40))
-        view.backgroundColor = .red
-//        view.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
-        let lbl = UILabel(frame: CGRect(x: 15, y: 0, width: view.frame.width - 15, height: 40))
-        lbl.text = store[section].storeName
-        lbl.numberOfLines = 0
-        view.addSubview(lbl)
-        return view
+
+}
+
+extension RegistrationTableViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath {
+        case [2, 0]:
+            return 280
+        case [3, 0]:
+            return 100
+        default:
+            return 60
+        }
+        
     }
 }
 
 extension RegistrationTableViewController {
-    
     func setTableView() {
         view.addSubview(menuTableView)
         menuTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             menuTableView.topAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: 10),
-        menuTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-        menuTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        menuTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            menuTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            menuTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            menuTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
         menuTableView.dataSource = self
+        menuTableView.delegate = self
         menuTableView.register(RegistrationTableViewCell.self, forCellReuseIdentifier: "RegistrationTableViewCell")
-        menuTableView.rowHeight = 50
-        //        menuTableView.separatorInset.right = 20 // 셀 나눠주는 선 끝부분 공백
+        menuTableView.rowHeight = 50     
     }
     
     func setUI() {
@@ -160,5 +168,16 @@ extension RegistrationTableViewController {
         closeButton.isUserInteractionEnabled = true
         
     }
+    
 }
 
+//    private func tableView(_ tableView: UITableView, viewForHeaterInSection section: Int) -> UIView? {
+//        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height:30))
+//        view.backgroundColor = .red
+//        //        view.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
+//        let lbl = UILabel(frame: CGRect(x: 15, y: 0, width: view.frame.width - 15, height: 40))
+//        lbl.text = store[section].storeName
+//        lbl.numberOfLines = 0
+//        view.addSubview(lbl)
+//        return view
+//    }

@@ -99,8 +99,18 @@ extension PersonalViewController {
         backgroundView.layer.shadowOffset = CGSize(width: 0, height: 4) // 위치조정
         backgroundView.layer.shadowRadius = 5 // 반경
         backgroundView.layer.shadowOpacity = 0.3 // alpha값
-        
-        logInLabel.text = "로그인이 \n필요해요. >"
+
+        //이미지 만들기
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = UIImage(systemName: "chevron.right")
+        let font = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 25)]
+        //이미지 추가 같은 타입으로 설정
+        let attachmentString = NSAttributedString(attachment: imageAttachment)
+        //글자 만들기
+        let completeText = NSMutableAttributedString(string: "로그인이 \n필요해요.  ", attributes: font)
+        //글자에 이미지 추가
+        completeText.append(attachmentString)
+        logInLabel.attributedText = completeText
         logInLabel.textAlignment = .left
         logInLabel.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         logInLabel.numberOfLines = 0
@@ -144,7 +154,13 @@ extension PersonalViewController {
         searchBarTaped.numberOfTapsRequired = 1
         plusFavorite.addGestureRecognizer(searchBarTaped)
         plusFavorite.isUserInteractionEnabled = true
-        plusFavorite.text = "더보기 >"
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = UIImage(systemName: "chevron.right")
+        let font = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 25), NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+        let attachmentString = NSAttributedString(attachment: imageAttachment)
+        let completeText = NSMutableAttributedString(string: "더보기 ", attributes: font)
+        completeText.append(attachmentString)
+        plusFavorite.attributedText = completeText
         plusFavorite.font = UIFont.systemFont(ofSize: 15, weight: .light)
         plusFavorite.textColor = .lightGray
         plusFavorite.textAlignment = .left
@@ -190,7 +206,13 @@ extension PersonalViewController {
         searchBarTaped.numberOfTapsRequired = 1
         plusStore.addGestureRecognizer(searchBarTaped)
         plusStore.isUserInteractionEnabled = true
-        plusStore.text = "더보기 >"
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = UIImage(systemName: "chevron.right")
+        let font = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 25)]
+        let attachmentString = NSAttributedString(attachment: imageAttachment)
+        let completeText = NSMutableAttributedString(string: "더보기 ", attributes: font)
+        completeText.append(attachmentString)
+        plusStore.attributedText = completeText
         plusStore.font = UIFont.systemFont(ofSize: 15, weight: .light)
         plusStore.textColor = .lightGray
         plusStore.textAlignment = .left
@@ -235,7 +257,13 @@ extension PersonalViewController {
         searchBarTaped.numberOfTapsRequired = 1
         plusComment.addGestureRecognizer(searchBarTaped)
         plusComment.isUserInteractionEnabled = true
-        plusComment.text = "더보기 >"
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = UIImage(systemName: "chevron.right")
+        let font = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 25)]
+        let attachmentString = NSAttributedString(attachment: imageAttachment)
+        let completeText = NSMutableAttributedString(string: "더보기 ", attributes: font)
+        completeText.append(attachmentString)
+        plusComment.attributedText = completeText
         plusComment.font = UIFont.systemFont(ofSize: 15, weight: .light)
         plusComment.textColor = .lightGray
         plusComment.textAlignment = .left
