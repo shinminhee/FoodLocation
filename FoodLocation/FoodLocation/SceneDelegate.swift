@@ -32,6 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UINavigationBar.setTransparentTabbar()
 
         window?.rootViewController = tabBarController
+        
         window?.backgroundColor = .black
         window?.makeKeyAndVisible()
     }
