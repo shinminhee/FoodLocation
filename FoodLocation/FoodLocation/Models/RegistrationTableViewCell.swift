@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class RegistrationTableViewCell: UITableViewCell {
     
     let storeTextField = UITextField()
@@ -152,10 +153,8 @@ extension RegistrationTableViewCell {
         
         locationButton.backgroundColor = .white
         locationButton.layer.cornerRadius = 10
-        let imageIcon = UIImage(systemName: "magnifyingglass")?.withTintColor(.red, renderingMode: .alwaysOriginal)
+        let imageIcon = UIImage(systemName: "magnifyingglass")?.withTintColor(UIColor(red: 255/255, green: 212/255, blue: 100/255, alpha: 1), renderingMode: .alwaysOriginal)
         locationButton.setImage(imageIcon, for: .normal)
-        let dimageIcon = UIImage(systemName: "magnifyingglass")?.withTintColor(.blue, renderingMode: .alwaysOriginal)
-        locationButton.setImage(dimageIcon, for: .highlighted)
         locationButton.layer.borderWidth = 0.1
         locationButton.layer.borderColor = UIColor.gray.cgColor
         locationButton.layer.shadowColor = UIColor.gray.cgColor // 색깔

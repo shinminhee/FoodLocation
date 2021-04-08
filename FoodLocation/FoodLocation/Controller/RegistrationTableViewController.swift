@@ -26,6 +26,7 @@ class RegistrationTableViewController: UIViewController {
     let textField = UITextField()
     let Button = UIButton()
     var store = [Store]()
+   
     
     
     override func viewDidLoad() {
@@ -63,7 +64,7 @@ extension RegistrationTableViewController: UITableViewDataSource {
         return store[section].detailName?.count ?? 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RegistrationTableViewCell", for: indexPath) as? RegistrationTableViewCell else { fatalError() }
+        let cell = RegistrationTableViewCell()
         switch indexPath {
         case [0, 0]:
             cell.setStoreTextField()

@@ -27,11 +27,18 @@ class PersonalViewController: UIViewController {
     let plusStore = UILabel()
     let plusComment = UILabel()
     let plusFavorite = UILabel()
+    var numberObCell: Int = 1
     
     let storeImageText = ["store1", "store2", "store3", "store4", "store5", "store6", "store7", "store8", "store9", "store10", "store11", "store12"]
     let colors: [UIColor] = [UIColor.systemRed, UIColor.systemBlue, UIColor.systemPink, UIColor.systemYellow, UIColor.systemIndigo, UIColor.systemRed, UIColor.systemBlue, UIColor.systemPink, UIColor.systemYellow, UIColor.systemIndigo]
     let collectionLayout = UICollectionViewFlowLayout() //collectionviewlayout 잡기위함
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionLayout)
+    
+    let regiCollectionLayout = UICollectionViewFlowLayout()
+    lazy var regiCollectionView = UICollectionView(frame: .zero, collectionViewLayout: regiCollectionLayout)
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +51,8 @@ class PersonalViewController: UIViewController {
         setComment()
         setCollection()
         setLayout()
+//        setRegiLayout()
+//        setRegiCollection()
         
         
     }
@@ -71,6 +80,31 @@ class PersonalViewController: UIViewController {
         
     }
 }
+  
+
+extension PersonalViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return numberObCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let collectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CustomCollectionViewCell
+        collectionCell.storeImageVIew.image = UIImage(named: storeImageText[indexPath.item])
+        collectionCell.clipsToBounds = true
+        collectionCell.layer.cornerRadius = 15
+        
+        return collectionCell
+    }
+}
+    
+extension PersonalViewController: UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(#function)
+        self.numberObCell += 1
+        collectionView.reloadData()
+        }
+    }
+
 
 extension PersonalViewController {
     func setUI() {
@@ -170,9 +204,8 @@ extension PersonalViewController {
         likeStoreViewLabel.text = "내가 찜한 가게가 없어요."
         likeStoreViewLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         likeStoreViewLabel.textColor = .lightGray
-
-        
     }
+    
     func setRegistration() {
         
         [regiStoreView, regiStoreLabel, regiStoreViewLabel, plusStore].forEach { (view) in
@@ -299,24 +332,32 @@ extension PersonalViewController {
     func setCollection() {
         collectionView.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
     }
-}
-
-extension PersonalViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return colors.count
+    
+    func setRegiLayout() {
+      
+        view.addSubview(regiCollectionView)
+        regiCollectionView.showsHorizontalScrollIndicator = false
+        regiCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            regiCollectionView.topAnchor.constraint(equalTo: regiStoreView.topAnchor),
+            regiCollectionView.leadingAnchor.constraint(equalTo: regiStoreView.leadingAnchor),
+            regiCollectionView.trailingAnchor.constraint(equalTo:  regiStoreView.trailingAnchor),
+            regiCollectionView.heightAnchor.constraint(equalTo:  regiStoreView.heightAnchor)
+        ])
+        
+        regiCollectionLayout.scrollDirection = .horizontal
+        regiCollectionLayout.minimumInteritemSpacing = 10
+        regiCollectionLayout.minimumLineSpacing = 10
+        regiCollectionLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        regiCollectionLayout.itemSize = CGSize(width: 120, height: 80)
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let collectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CustomCollectionViewCell
-//        collectionCell.backgroundColor = colors[indexPath.item]
-        collectionCell.storeImageVIew.image = UIImage(named: storeImageText[indexPath.item])
-        collectionCell.clipsToBounds = true
-        collectionCell.layer.cornerRadius = 15
-
-        
-        return collectionCell
+    func setRegiCollection() {
+        regiCollectionView.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
+        regiCollectionView.dataSource = self
+        regiCollectionView.register(MyRegistrationCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
     }
-  
 }

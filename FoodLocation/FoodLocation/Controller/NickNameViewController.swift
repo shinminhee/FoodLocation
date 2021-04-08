@@ -13,6 +13,7 @@ class NickNameViewController: UIViewController {
     let nickNameTextField = UITextField()
     let nickNameLabel = UILabel()
     let startButton = UIButton()
+    weak var delegate: NickNameViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,11 +33,8 @@ class NickNameViewController: UIViewController {
         let nickNameData: [String:String] = ["여기 닉네임을 입력해주세요.": nickName]
         userList.append(nickNameData)
         UserDefaults.standard.set(userList, forKey: "UserList")
+        self.delegate?.startButtonPressed()
         self.view.window?.rootViewController?.dismiss(animated: false, completion: {
-          let homeVC = ViewController()
-          homeVC.modalPresentationStyle = .fullScreen
-          let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//            appDelegate.window?.rootViewController?.present(homeVC, animated: true, completion: nil)
         })
         }
     }
@@ -99,8 +97,13 @@ extension NickNameViewController {
         nickNameLabel.textAlignment = .center
         nickNameLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         
+        
         nickNameTextField.placeholder = "여기 닉네임을 입력해주세요."
         nickNameTextField.borderStyle = .roundedRect
         nickNameTextField.delegate = self
     }
+}
+
+protocol NickNameViewControllerDelegate: class {
+    func startButtonPressed()
 }

@@ -10,6 +10,7 @@ target 'FoodLocation' do
  
   # Pods for FoodLocation
   pod 'NMapsMap'
+  pod 'ExpyTableView'
 
    # Pods for SignInWithGoogle_Example
   pod 'Firebase/Analytics'

@@ -15,6 +15,7 @@ class LogINViewController: UIViewController {
     let logInLabel = UILabel()
     let closeButton = UIImageView()
     let googleLoginButton = GIDSignInButton()
+    var emptyNickName: String? = ""
     
     
     override func viewDidLoad() {
@@ -61,6 +62,7 @@ extension LogINViewController: GIDSignInDelegate {
             print("User Name : \((fullName))")
             let nickNameVC = NickNameViewController()
             nickNameVC.modalPresentationStyle = .fullScreen
+            nickNameVC.delegate = self
             present(nickNameVC,animated: true, completion: nil)
         } else {
             print("Error : User Data Not Found")
@@ -70,6 +72,16 @@ extension LogINViewController: GIDSignInDelegate {
     // 구글 로그인 연동 해제했을때 불러오는 메소드
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         print("Disconnect")
+    }
+}
+
+extension LogINViewController: NickNameViewControllerDelegate {
+    func startButtonPressed() {
+        let personalVC = PersonalViewController()
+        let nickNameVC = NickNameViewController()
+        self.emptyNickName = String(nickNameVC.nickNameTextField.text ?? "")
+        personalVC.logInLabel.text = "안녕하세요 \n\(String(describing: self.emptyNickName))님"
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -113,7 +125,6 @@ extension LogINViewController {
             closeButton.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -10),
             closeButton.heightAnchor.constraint(equalToConstant: 30),
             closeButton.widthAnchor.constraint(equalToConstant: 30)
-            
         ])
         
         backgroundView.backgroundColor = .white

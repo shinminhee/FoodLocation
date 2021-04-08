@@ -4,6 +4,7 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.4.0)
   - AppAuth/Core (1.4.0)
   - AppAuth/ExternalUserAgent (1.4.0)
+  - ExpyTableView (1.2.1)
   - Firebase/Analytics (7.9.0):
     - Firebase/Core
   - Firebase/Auth (7.9.0):
@@ -93,6 +94,7 @@ PODS:
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
+  - ExpyTableView
   - Firebase/Analytics
   - Firebase/Auth
   - GoogleSignIn
@@ -102,6 +104,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AppAuth
+    - ExpyTableView
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -121,6 +124,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
+  ExpyTableView: 19cf224c2ff04b1ec215ec52bc4ba6f81fa809ed
   Firebase: d8bd6bd34b4c7ed57bfdd056c66ff5adcdde53ab
   FirebaseAnalytics: 31b1269830dfe16687db3c60b76082c12bd6d527
   FirebaseAuth: 20625f04fdd213995249a82375b3dab39b1c136c
@@ -138,6 +142,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 145dc726d6da087c5ac463ac1ce1166fd8df2d33
+PODFILE CHECKSUM: 01328aba1743dbc5c64a47a6125d51ed036fd8f0
 
 COCOAPODS: 1.10.1
