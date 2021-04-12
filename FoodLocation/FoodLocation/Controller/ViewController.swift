@@ -5,7 +5,6 @@
 //  Created by 신민희 on 2021/03/25.
 //
 
-import MapKit
 import UIKit
 import NMapsMap
 
@@ -18,77 +17,28 @@ class ViewController: UIViewController {
     let searchViewImage = UIImageView()
     let searchViewLabel = UILabel()
     let button = UIButton()
+    let locationButton = UIButton()
+    var currentLatitude: Double = 0
+    var currentLongtitude: Double = 0
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
-        //        mapView.showsUserLocation = true
-        //        reRegion()
         setUI()
         setSearchView()
-        //        addAnnotation()
         setupLocationManager()
         setCamera()
-        setMarker()
+
     }
     
-    func setCamera() {
-        
-        let camPosition =  NMGLatLng(lat: 37.5670135, lng: 126.9783740)
-//        let cameraPosition = mapView.cameraPosition
-        let cameraUpdate = NMFCameraUpdate(scrollTo: camPosition)
-        mapView.moveCamera(cameraUpdate)
+    @objc
+    func locationButtonTaped(_ sender: UIButton) {
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: currentLatitude, lng: currentLongtitude))
+        cameraUpdate.animation = .fly
+        cameraUpdate.animationDuration = 1
+        self.mapView.moveCamera(cameraUpdate)
     }
-    
-    func setMarker() {
-        let marker = NMFMarker()
-        marker.position = NMGLatLng(lat: 37.5670135, lng: 126.9783740)
-        marker.iconImage = NMF_MARKER_IMAGE_BLACK
-        marker.iconTintColor = UIColor.red
-        marker.width = 50
-        marker.height = 60
-        marker.mapView = mapView
-        
-        // 정보창 생성
-        let infoWindow = NMFInfoWindow()
-        let dataSource = NMFInfoWindowDefaultTextSource.data()
-        dataSource.title = "서울특별시청"
-        infoWindow.dataSource = dataSource
-        
-        // 마커에 달아주기
-        infoWindow.open(with: marker)
-    }
-    
-    
-    
-    
-    func setupLocationManager() {
-        //        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization() //권한 요청
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.startUpdatingLocation()
-    }
-    
-    // 내 위치 잡을때
-    //    func reRegion() {
-    //        let region = MKCoordinateRegion(center: mapView.userLocation.coordinate, latitudinalMeters: 10, longitudinalMeters: 10)
-    //        mapView.setRegion(region, animated: true)
-    //    }
-    
-    //    맵에서 위치 표시하는 화살표를 어노테이션 이라고 함
-    //    func addAnnotation() {
-    //        let annotation = MKPointAnnotation()
-    //        //위도, 경도
-    //        annotation.coordinate = CLLocationCoordinate2D(latitude: 37.85, longitude: -122.4194)
-    //        //내 위치 찍을때
-    //        annotation.coordinate = mapView.userLocation.coordinate
-    //        annotation.title = "shin.mini"
-    //        annotation.subtitle = "I'm here"
-    //        mapView.addAnnotation(annotation)
-    //
-    //    }
     
     @objc
     func searchBarTaped(_ sender: UITapGestureRecognizer) {
@@ -98,29 +48,27 @@ class ViewController: UIViewController {
     }
 }
 
-//extension ViewController: CLLocationManagerDelegate {
-//
-//}
-//
-//extension ViewController: MKMapViewDelegate {
-//    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-//        addAnnotation()
-//        reRegion()
-//    }
-//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//        if annotation is MKUserLocation { return nil } // 이거 안해주면 파란색 점 안 보이고 커피로 인식
-//        let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "annotation")
-//        annotationView.glyphText = "coffee"
-//        annotationView.canShowCallout = true
-//        annotationView.leftCalloutAccessoryView = createImageViewForAnnotation(annotationView: annotationView, imageName: "coffee") // 왼쪽에 사진 넣기
-//        annotationView.rightCalloutAccessoryView = createImageViewForAnnotation(annotationView: annotationView, imageName: "coffee") // 오른쪽에 사진 넣기
-//        return annotationView //
-//
-//    }
-//}
+extension ViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        currentLatitude = locations.last!.coordinate.latitude
+        currentLongtitude = locations.last!.coordinate.longitude
+    }
+    
+}
 
 
 extension ViewController {
+    func setupLocationManager() {
+    locationManager.delegate = self
+    locationManager.requestWhenInUseAuthorization() //권한 요청
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    locationManager.distanceFilter = kCLDistanceFilterNone
+    locationManager.startUpdatingLocation()
+    }
+    
+    func setCamera() {
+       
+    }
     private func setUI() {
         view.addSubview(mapView)
         view.addSubview(button)
@@ -149,7 +97,7 @@ extension ViewController {
     
     func setSearchView() {
         view.addSubview(searchView)
-        [searchView, searchViewLabel, searchViewImage, searchViewBackImage].forEach { (view) in
+        [searchView, searchViewLabel, searchViewImage, searchViewBackImage, locationButton].forEach { (view) in
             self.view.addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -171,11 +119,16 @@ extension ViewController {
             searchViewLabel.widthAnchor.constraint(equalToConstant: 200),
             
             searchViewBackImage.trailingAnchor.constraint(equalTo: searchView.trailingAnchor, constant: -10),
-            searchViewBackImage.widthAnchor.constraint(equalToConstant: 30),
             searchViewBackImage.topAnchor.constraint(equalTo: searchView.topAnchor, constant: 10),
-            searchViewBackImage.bottomAnchor.constraint(equalTo: searchView.bottomAnchor, constant: -10)
+            searchViewBackImage.bottomAnchor.constraint(equalTo: searchView.bottomAnchor, constant: -10),
+            searchViewBackImage.widthAnchor.constraint(equalToConstant: 30),
+            
+            locationButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 650),
+            locationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 300),
+            locationButton.heightAnchor.constraint(equalToConstant: 60),
+            locationButton.widthAnchor.constraint(equalToConstant: 60),
+            
         ])
-        
         
         searchView.backgroundColor = .white
         let searchBarTaped = UITapGestureRecognizer(target: self, action: #selector(searchBarTaped(_:)))
@@ -191,9 +144,34 @@ extension ViewController {
         
         searchViewImage.image = UIImage(systemName: "magnifyingglass")?.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
         searchViewBackImage.image = UIImage(systemName: "list.bullet")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+        
+        locationButton.backgroundColor = UIColor(red: 255/255, green: 212/255, blue: 100/255, alpha: 1)
+        locationButton.layer.cornerRadius = 30
+        locationButton.setImage(UIImage(systemName: "scope"), for: .normal)
+        locationButton.tintColor = UIColor.gray
+        locationButton.addTarget(self, action: #selector(locationButtonTaped(_:)), for: .touchUpInside)
+    
     }
     
     
     
 }
 
+//func setMarker() {
+//        let marker = NMFMarker()
+//        marker.position = NMGLatLng(lat: 37.5670135, lng: 126.9783740)
+//        marker.iconImage = NMF_MARKER_IMAGE_BLACK
+//        marker.iconTintColor = UIColor.red
+//        marker.width = 50
+//        marker.height = 50
+//        marker.mapView = mapView
+//
+//        // 정보창 생성
+//        let infoWindow = NMFInfoWindow()
+//        let dataSource = NMFInfoWindowDefaultTextSource.data()
+//        dataSource.title = "서울특별시청"
+//        infoWindow.dataSource = dataSource
+//
+//        // 마커에 달아주기
+//        infoWindow.open(with: marker)
+//    }

@@ -37,7 +37,8 @@ class PersonalViewController: UIViewController {
     let regiCollectionLayout = UICollectionViewFlowLayout()
     lazy var regiCollectionView = UICollectionView(frame: .zero, collectionViewLayout: regiCollectionLayout)
     
-    
+    var emptyNickName: String? = ""
+
     
     
     override func viewDidLoad() {
@@ -80,7 +81,26 @@ class PersonalViewController: UIViewController {
         
     }
 }
+
+//extension PersonalViewController: NickNameViewControllerDelegate {
+//    func startButtonPressed(text: String) {
+//        let nickNameVC = NickNameViewController()
+//        self.emptyNickName = String(nickNameVC.nickNameTextField.text ?? "")
+//        logInLabel.text = "안녕하세요 \n\(String(describing: self.emptyNickName))님"
+//        nickNameVC.delegate = self
+//        dismiss(animated: true, completion: nil)
+//        print("123")
+//    }
+//}
   
+extension PersonalViewController: NickNameViewControllerDelegate {
+    func startButtonPressed(text: String) {
+        logInLabel.text = text
+        let nickNameVC = NickNameViewController()
+        nickNameVC.delegate = self
+        print("123")
+    }
+}
 
 extension PersonalViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -153,6 +173,7 @@ extension PersonalViewController {
         searchBarTaped.numberOfTapsRequired = 1
         logInLabel.addGestureRecognizer(searchBarTaped)
         logInLabel.isUserInteractionEnabled = true
+        
     }
     
     func setLike() {

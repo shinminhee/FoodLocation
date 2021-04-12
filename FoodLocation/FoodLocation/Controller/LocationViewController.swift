@@ -7,6 +7,8 @@
 
 import UIKit
 import WebKit
+import MapKit
+import NMapsMap
 
 class LocationViewController: UIViewController {
     
@@ -63,7 +65,29 @@ extension LocationViewController: WKScriptMessageHandler {
         guard let tabBarController = presentingViewController as? UITabBarController else { return }
         guard let firstVC = tabBarController.viewControllers?.first as? ViewController else { return }
         firstVC.searchViewLabel.text = address
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true) {
+            let address = CLGeocoder()
+            var lat: Double = 0
+            var lng: Double = 0
+            address.geocodeAddressString(firstVC.searchViewLabel.text ?? "", completionHandler: { placemarks, error in
+                guard let placemark = placemarks?.first!, let location = placemark.location else { return }
+                print(location)
+               lat = location.coordinate.latitude
+               lng = location.coordinate.longitude
+                let marker = NMFMarker()
+                marker.position = NMGLatLng(lat: lat, lng: lng)
+                marker.iconImage = NMF_MARKER_IMAGE_BLACK
+                marker.iconTintColor = UIColor.red
+                marker.width = 50
+                marker.height = 50
+                marker.mapView = firstVC.mapView
+                let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: lng))
+                cameraUpdate.animation = .fly
+                cameraUpdate.animationDuration = 1
+                firstVC.mapView.moveCamera(cameraUpdate)
+                
+            })
+        }
         
         
     }

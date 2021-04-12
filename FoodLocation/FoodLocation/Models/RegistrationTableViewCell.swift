@@ -99,9 +99,9 @@ extension RegistrationTableViewCell {
     func setCollectionView() {
         guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { fatalError() }
         layout.itemSize = CGSize(width: 80, height: 80)
-        layout.minimumLineSpacing = 5
-        layout.minimumInteritemSpacing = 5
-        layout.sectionInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+        layout.minimumLineSpacing = 1
+        layout.minimumInteritemSpacing = 1
+        layout.sectionInset = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
         
         collectionView.register(RegistrationCollectionViewCell.self, forCellWithReuseIdentifier: RegistrationCollectionViewCell.identifier)
         collectionView.dataSource = self
@@ -167,7 +167,7 @@ extension RegistrationTableViewCell {
             locationTextField.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
             locationTextField.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
             locationTextField.heightAnchor.constraint(equalToConstant: 50),
-            locationTextField.widthAnchor.constraint(equalToConstant: 290),
+            locationTextField.widthAnchor.constraint(equalToConstant: 280),
             
             locationButton.leadingAnchor.constraint(equalTo: locationTextField.trailingAnchor, constant: 10),
             locationButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),

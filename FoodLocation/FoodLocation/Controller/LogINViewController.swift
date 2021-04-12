@@ -62,7 +62,7 @@ extension LogINViewController: GIDSignInDelegate {
             print("User Name : \((fullName))")
             let nickNameVC = NickNameViewController()
             nickNameVC.modalPresentationStyle = .fullScreen
-            nickNameVC.delegate = self
+//            nickNameVC.delegate = self
             present(nickNameVC,animated: true, completion: nil)
         } else {
             print("Error : User Data Not Found")
@@ -75,15 +75,15 @@ extension LogINViewController: GIDSignInDelegate {
     }
 }
 
-extension LogINViewController: NickNameViewControllerDelegate {
-    func startButtonPressed() {
-        let personalVC = PersonalViewController()
-        let nickNameVC = NickNameViewController()
-        self.emptyNickName = String(nickNameVC.nickNameTextField.text ?? "")
-        personalVC.logInLabel.text = "안녕하세요 \n\(String(describing: self.emptyNickName))님"
-        dismiss(animated: true, completion: nil)
-    }
-}
+//extension LogINViewController: NickNameViewControllerDelegate {
+//    func startButtonPressed() {
+//        let personalVC = PersonalViewController()
+//        let nickNameVC = NickNameViewController()
+//        self.emptyNickName = String(nickNameVC.nickNameTextField.text ?? "")
+//        personalVC.logInLabel.text = "안녕하세요 \n\(String(describing: self.emptyNickName))님"
+//        dismiss(animated: true, completion: nil)
+//    }
+//}
 
 extension LogINViewController {
     private func configureUI() {

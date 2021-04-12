@@ -50,7 +50,8 @@ class RegistrationTableViewController: UIViewController {
     @objc
     func setLocationButton(_ sender: UIButton) {
         let naverVC = NaverMapViewController()
-        self.navigationController?.pushViewController(naverVC, animated: true)
+        naverVC.modalPresentationStyle = .fullScreen
+        present(naverVC, animated: true, completion: nil)
         print(123)
     }
 }
@@ -96,7 +97,7 @@ extension RegistrationTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath {
         case [2, 0]:
-            return 280
+            return 290
         case [3, 0]:
             return 100
         default:

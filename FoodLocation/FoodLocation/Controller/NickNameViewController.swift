@@ -23,6 +23,8 @@ class NickNameViewController: UIViewController {
     
     @objc
     func startButton(_ sender: UIButton) {
+        guard let text = nickNameTextField.text else {return}
+        self.delegate?.startButtonPressed(text: "신민희")
         guard let nickName = nickNameTextField.text else { return }
         var userList: [[String: String]]
         if let tempList = UserDefaults.standard.array(forKey: "UserList") as? [[String:String]] {
@@ -33,7 +35,6 @@ class NickNameViewController: UIViewController {
         let nickNameData: [String:String] = ["여기 닉네임을 입력해주세요.": nickName]
         userList.append(nickNameData)
         UserDefaults.standard.set(userList, forKey: "UserList")
-        self.delegate?.startButtonPressed()
         self.view.window?.rootViewController?.dismiss(animated: false, completion: {
         })
         }
@@ -105,5 +106,5 @@ extension NickNameViewController {
 }
 
 protocol NickNameViewControllerDelegate: class {
-    func startButtonPressed()
+    func startButtonPressed(text: String)
 }
