@@ -18,6 +18,7 @@ class LogINViewController: UIViewController {
     var emptyNickName: String? = ""
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

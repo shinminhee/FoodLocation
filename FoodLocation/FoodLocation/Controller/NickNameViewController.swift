@@ -39,7 +39,9 @@ class NickNameViewController: UIViewController {
         })
         }
     }
-
+protocol NickNameViewControllerDelegate: class {
+    func startButtonPressed(text: String)
+}
 
 extension NickNameViewController: UITextFieldDelegate {
     
@@ -105,6 +107,4 @@ extension NickNameViewController {
     }
 }
 
-protocol NickNameViewControllerDelegate: class {
-    func startButtonPressed(text: String)
-}
+
