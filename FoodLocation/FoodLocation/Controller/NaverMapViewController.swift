@@ -43,7 +43,7 @@ class NaverMapViewController: UIViewController {
     }
     @objc
     func searchBarTaped(_ sender: UITapGestureRecognizer) {
-        let locationVC = LocationViewController()
+        let locationVC = LocationInTableViewController()
         self.present(locationVC, animated: true, completion: nil)
         
     }
@@ -121,7 +121,7 @@ extension NaverMapViewController {
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.startUpdatingLocation()
     }
-   private func setNaverMap() {
+    func setNaverMap() {
             view.addSubview(mapView)
             view.addSubview(button)
             mapView.translatesAutoresizingMaskIntoConstraints = false

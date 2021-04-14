@@ -5,6 +5,8 @@
 //  Created by 신민희 on 2021/04/13.
 //
 
+// 가게이름, 위치, 주문음식, 상세 내용
+
 import UIKit
 import NMapsMap
 
@@ -17,7 +19,16 @@ class MapAndStoreViewController: UIViewController {
     let mainLabel = UILabel()
     let likeLabel = UILabel()
     
-
+    let storeNameLabel = UILabel()
+    let locationLabel = UILabel()
+    let foodNameLabel = UILabel()
+    let detailLabel = UILabel()
+    
+    let storeName = UILabel()
+    let location = UILabel()
+    let foodName = UILabel()
+    let detail = UILabel()
+    var isSelected = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +57,7 @@ class MapAndStoreViewController: UIViewController {
     func likeLabelTap2(_ sender: UITapGestureRecognizer) {
         
         let imageAttachment = NSTextAttachment()
-        imageAttachment.image = UIImage(systemName: "heart")
+        imageAttachment.image = isSelected ? UIImage(systemName: "heart") : UIImage(systemName: "heart.fill")
         let completeText = NSAttributedString(attachment: imageAttachment)
         let font = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
         let attachmentString = NSMutableAttributedString(string: "찜 ", attributes: font)
@@ -54,8 +65,14 @@ class MapAndStoreViewController: UIViewController {
         likeLabel.attributedText = attachmentString
         likeLabel.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         likeLabel.textAlignment = .right
+        isSelected.toggle()
     }
+}
+
+extension MapAndStoreViewController {
+    func setBottomView() {
     
+    }
     func setMap() {
         view.addSubview(mapView)
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -79,6 +96,67 @@ class MapAndStoreViewController: UIViewController {
             infoView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         infoView.backgroundColor = .white
+        
+        [storeName, storeNameLabel, location, locationLabel, detail, detailLabel, foodName, foodNameLabel].forEach { (view) in
+            infoView.addSubview(view)
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        NSLayoutConstraint.activate([
+            storeNameLabel.topAnchor.constraint(equalTo: infoView.topAnchor, constant: 100),
+            storeNameLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 20),
+            storeNameLabel.widthAnchor.constraint(equalToConstant: 200),
+            storeNameLabel.heightAnchor.constraint(equalToConstant: 40),
+            
+            storeName.topAnchor.constraint(equalTo: storeNameLabel.bottomAnchor, constant: 10),
+            storeName.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 20),
+            storeName.widthAnchor.constraint(equalToConstant: 200),
+            storeName.heightAnchor.constraint(equalToConstant: 40),
+            
+            locationLabel.topAnchor.constraint(equalTo: storeName.bottomAnchor, constant: 20),
+            locationLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 20),
+            locationLabel.widthAnchor.constraint(equalToConstant: 200),
+            locationLabel.heightAnchor.constraint(equalToConstant: 40),
+            
+            location.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 10),
+            location.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 20),
+            location.widthAnchor.constraint(equalToConstant: 200),
+            location.heightAnchor.constraint(equalToConstant: 40),
+            
+            detailLabel.topAnchor.constraint(equalTo: location.bottomAnchor, constant: 20),
+            detailLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 20),
+            detailLabel.widthAnchor.constraint(equalToConstant: 200),
+            detailLabel.heightAnchor.constraint(equalToConstant: 40),
+            
+            detail.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 10),
+            detail.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 20),
+            detail.widthAnchor.constraint(equalToConstant: 200),
+            detail.heightAnchor.constraint(equalToConstant: 40),
+            
+            foodNameLabel.topAnchor.constraint(equalTo: detail.bottomAnchor, constant: 20),
+            foodNameLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 20),
+            foodNameLabel.widthAnchor.constraint(equalToConstant: 200),
+            foodNameLabel.heightAnchor.constraint(equalToConstant: 40),
+            
+            foodName.topAnchor.constraint(equalTo: foodNameLabel.bottomAnchor, constant: 10),
+            foodName.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 20),
+            foodName.widthAnchor.constraint(equalToConstant: 200),
+            foodName.heightAnchor.constraint(equalToConstant: 40),
+            
+        ])
+        storeNameLabel.text = "가게 이름"
+        storeNameLabel.backgroundColor = .red
+        locationLabel.text = "위치"
+        locationLabel.backgroundColor = .yellow
+        detailLabel.text = "상세내용"
+        detailLabel.backgroundColor = .blue
+        foodNameLabel.text = "음식 이름"
+        foodNameLabel.backgroundColor = .black
+        
+        storeName.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        location.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        detail.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        foodName.font = UIFont.systemFont(ofSize: 15, weight: .light)
     }
     
     func setMainView() {
@@ -118,15 +196,15 @@ class MapAndStoreViewController: UIViewController {
         mainLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         
         
-        let searchBarTaped = UITapGestureRecognizer(target: self, action: #selector(likeLabelTap(_:)))
-        searchBarTaped.numberOfTouchesRequired = 1
-        searchBarTaped.numberOfTapsRequired = 1
-        likeLabel.addGestureRecognizer(searchBarTaped)
-        likeLabel.isUserInteractionEnabled = true
+//        let searchBarTaped = UITapGestureRecognizer(target: self, action: #selector(likeLabelTap(_:)))
+//        searchBarTaped.numberOfTouchesRequired = 1
+//        searchBarTaped.numberOfTapsRequired = 1
+//        likeLabel.addGestureRecognizer(searchBarTaped)
+//        likeLabel.isUserInteractionEnabled = true
         
         let searchBarTaped2 = UITapGestureRecognizer(target: self, action: #selector(likeLabelTap2(_:)))
-        searchBarTaped2.numberOfTouchesRequired = 1 // 손가락 수 설정
-        searchBarTaped2.numberOfTapsRequired = 2 // 터치 수 설정 ex 더블클릭같은,,
+//        searchBarTaped2.numberOfTouchesRequired = 1 // 손가락 수 설정
+//        searchBarTaped2.numberOfTapsRequired = 1 // 터치 수 설정 ex 더블클릭같은,,
         likeLabel.addGestureRecognizer(searchBarTaped2)
         likeLabel.isUserInteractionEnabled = true
         
@@ -142,6 +220,4 @@ class MapAndStoreViewController: UIViewController {
         
     }
   
-    
-    
 }

@@ -11,13 +11,22 @@ class MyStoreViewController: UIViewController {
     
     let backgroundView = UIView()
     let logInLabel = UILabel()
+    let myStore = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
         setUI()
+        setButton()
     }
+    @objc
+    func myStore(_ sender: UIButton) {
+        let mapAndStoreVC = MapAndStoreViewController()
+        self.navigationController?.pushViewController(mapAndStoreVC, animated: true)
+    }
+    
 }
+
 
 extension MyStoreViewController {
     
@@ -53,6 +62,20 @@ extension MyStoreViewController {
         logInLabel.textAlignment = .center
         logInLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         
+    }
+    
+    func setButton() {
+        view.addSubview(myStore)
+        myStore.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+                                        myStore.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            myStore.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            myStore.widthAnchor.constraint(equalToConstant: 300),
+            myStore.heightAnchor.constraint(equalToConstant: 100)
+        ])
+        myStore.setTitle("등록한 가게 보러가기", for: .normal)
+        myStore.backgroundColor = .red
+        myStore.addTarget(self, action: #selector(myStore(_:)), for: .touchUpInside)
     }
 }
 

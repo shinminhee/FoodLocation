@@ -32,6 +32,7 @@
 		5E808450260C6DCE00BA75FB /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E80844F260C6DCE00BA75FB /* SettingViewController.swift */; };
 		5ECA5DD9262548EB00E7AD2D /* MapAndStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECA5DD8262548EB00E7AD2D /* MapAndStoreViewController.swift */; };
 		5ECA5DDC26256C5D00E7AD2D /* TableViewLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECA5DDB26256C5D00E7AD2D /* TableViewLocationViewController.swift */; };
+		5ECA5DDF2626D06A00E7AD2D /* LocationInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECA5DDE2626D06A00E7AD2D /* LocationInTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		5E80844F260C6DCE00BA75FB /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		5ECA5DD8262548EB00E7AD2D /* MapAndStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAndStoreViewController.swift; sourceTree = "<group>"; };
 		5ECA5DDB26256C5D00E7AD2D /* TableViewLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewLocationViewController.swift; sourceTree = "<group>"; };
+		5ECA5DDE2626D06A00E7AD2D /* LocationInTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInTableViewController.swift; sourceTree = "<group>"; };
 		729286C0CB21AD826820FC58 /* Pods-FoodLocation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLocation.release.xcconfig"; path = "Target Support Files/Pods-FoodLocation/Pods-FoodLocation.release.xcconfig"; sourceTree = "<group>"; };
 		A59163E39AA75BB0477CDB72 /* Pods-FoodLocation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLocation.debug.xcconfig"; path = "Target Support Files/Pods-FoodLocation/Pods-FoodLocation.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,6 +125,7 @@
 				5E80844B260C665400BA75FB /* LogINViewController.swift */,
 				5E4E0328261D4DD1001FF770 /* NickNameViewController.swift */,
 				5E808446260C4B9700BA75FB /* LocationViewController.swift */,
+				5ECA5DDE2626D06A00E7AD2D /* LocationInTableViewController.swift */,
 				5ECA5DDB26256C5D00E7AD2D /* TableViewLocationViewController.swift */,
 				5E80844F260C6DCE00BA75FB /* SettingViewController.swift */,
 				5E4E02EE2619CDFF001FF770 /* MyStoreViewController.swift */,
@@ -314,6 +317,7 @@
 				5ECA5DDC26256C5D00E7AD2D /* TableViewLocationViewController.swift in Sources */,
 				5E808450260C6DCE00BA75FB /* SettingViewController.swift in Sources */,
 				5E4E02EF2619CDFF001FF770 /* MyStoreViewController.swift in Sources */,
+				5ECA5DDF2626D06A00E7AD2D /* LocationInTableViewController.swift in Sources */,
 				5E4E0329261D4DD1001FF770 /* NickNameViewController.swift in Sources */,
 				5E808423260C0B2400BA75FB /* AppDelegate.swift in Sources */,
 				5E4E02EB2619C3DB001FF770 /* CustomCollectionViewCell.swift in Sources */,

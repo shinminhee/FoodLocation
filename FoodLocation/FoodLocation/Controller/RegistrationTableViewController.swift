@@ -32,7 +32,7 @@ class RegistrationTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
-        menuTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+//        menuTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         setUI()
         setTableView()
         
@@ -53,6 +53,25 @@ class RegistrationTableViewController: UIViewController {
         naverVC.modalPresentationStyle = .fullScreen
         present(naverVC, animated: true, completion: nil)
         print(123)
+    }
+    @objc
+    func okButtonTaped(_ sender: UIButton) {
+        let mapView = MapAndStoreViewController()
+               mapView.modalPresentationStyle = .fullScreen
+               present(mapView, animated: true, completion: nil)
+        guard let cell = menuTableView.cellForRow(at: [3, 0]) as? RegistrationTableViewCell else { fatalError() }
+        print(cell.detailLocationTextField.text)
+        
+//        mapAndStoreVC.foodName.text = cell.menuText.[indexPath.row]
+//        let mapView = MapAndStoreViewController()
+//        mapView.modalPresentationStyle = .fullScreen
+//        present(mapView, animated: true) {
+//            let mapAndStoreVC = MapAndStoreViewController()
+//            let cell = RegistrationTableViewCell()
+//            mapAndStoreVC.storeName.text = cell.storeTextField.text
+//            mapAndStoreVC.detail.text = cell.detailTextLabel?.text
+//            mapAndStoreVC.location.text = cell.locationTextField.text
+//        {
     }
 }
 
@@ -80,9 +99,11 @@ extension RegistrationTableViewController: UITableViewDataSource {
         case [4, 0]:
             cell.setOkButton()
         default:
-            return cell
+             fatalError()
         }
         cell.locationButton.addTarget(self, action: #selector(setLocationButton(_:)), for: .touchUpInside)
+        cell.okButton.addTarget(self, action: #selector(okButtonTaped(_:)), for: .touchUpInside)
+
         cell.backgroundColor = view.backgroundColor
         return cell
     }
@@ -103,7 +124,14 @@ extension RegistrationTableViewController: UITableViewDelegate {
         default:
             return 60
         }
-        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        guard let firstVC = presentingViewController as? MapAndStoreViewController else { fatalError() }
+    }
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell1 = cell as? RegistrationTableViewCell else { fatalError() }
+        print(cell1.storeTextField.text)
     }
 }
 

@@ -27,7 +27,7 @@ class RegistrationTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         //        setStoreTextField()
         //        setLocationTextField()
-        self.selectionStyle = .none
+        self.selectionStyle = .none // 눌렀을때 표시 안나게 하는 것
     }
     
     required init?(coder: NSCoder) {
