@@ -25,6 +25,8 @@ class NaverMapViewController: UIViewController {
     let searchViewBackImage = UIImageView()
     let searchViewImage = UIImageView()
     let searchViewLabel = UILabel()
+    weak var delegate: NaverMapViewControllerDelegate?
+
 
 
     override func viewDidLoad() {
@@ -49,9 +51,12 @@ class NaverMapViewController: UIViewController {
     }
     @objc
     func okButtonTapped(_ sender : UIButton) {
+        guard let text = addressLabel.text else { return }
+        self.delegate?.textFieldInput(text: text)
+        print(text)
         dismiss(animated: true, completion: nil)
-        
     }
+    
     @objc
     func locationButtonTaped(_ sender: UIButton) {
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: currentLatitude, lng: currentLongtitude))
@@ -60,6 +65,11 @@ class NaverMapViewController: UIViewController {
         self.mapView.moveCamera(cameraUpdate)
     
     }
+}
+
+protocol NaverMapViewControllerDelegate: class {
+    func textFieldInput(text: String)
+    
 }
 
 extension NaverMapViewController: CLLocationManagerDelegate {
@@ -187,6 +197,7 @@ extension NaverMapViewController {
         infoLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         
         addressLabel.backgroundColor = .white
+
 
         okButton.setTitle("확인", for: .normal)
         okButton.setTitleColor(.black, for: .normal)

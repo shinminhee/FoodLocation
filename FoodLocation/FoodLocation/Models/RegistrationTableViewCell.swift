@@ -21,6 +21,8 @@ class RegistrationTableViewCell: UITableViewCell {
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let menuText = ["붕어빵", "풀빵", "호두과자", "땅콩빵", "계란빵", "바나나빵", "타코야키", "호떡", "떡볶이", "튀김", "순대", "어묵"]
     let blackMenuText = ["흑붕어빵", "흑풀빵", "흑호두과자", "흑땅콩빵", "흑계란빵", "흑바나나빵", "흑타코야키", "흑호떡", "흑떡볶이", "흑튀김", "흑순대", "흑어묵"]
+    var mySelected = false
+
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -60,10 +62,16 @@ extension RegistrationTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RegistrationCollectionViewCell.identifier, for: indexPath) as? RegistrationCollectionViewCell else { fatalError() }
         cell.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
-        cell.menuImage.image = UIImage(named: blackMenuText[indexPath.item])
+        cell.menuImage.image = isSelected ?  UIImage(named: blackMenuText[indexPath.item]) : UIImage(named: menuText[indexPath.item])
+               if indexPath.item == 0 {
+                   cell.isSelected = true
+               }
+//        cell.menuImage.image = isSelected ? UIImage(named: blackMenuText[indexPath.item]) : UIImage(named: menuText[indexPath.item])
+//        cell.menuImage.image = UIImage(named: blackMenuText[indexPath.item])
         cell.menuLabel.text = menuText[indexPath.row]
         cell.clipsToBounds = true
         cell.layer.cornerRadius = 15
+        isSelected.toggle()
         
         return cell
     }
@@ -88,7 +96,7 @@ extension RegistrationTableViewCell: UITextViewDelegate {
 extension RegistrationTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell1 = collectionView.cellForItem(at: indexPath) as? RegistrationCollectionViewCell else { fatalError() }
-        cell1.menuImage.image = UIImage(named: menuText[indexPath.item])
+//        cell1.menuImage.image = UIImage(named: menuText[indexPath.item])
 //        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RegistrationCollectionViewCell.identifier, for: indexPath) as? RegistrationCollectionViewCell else { fatalError() }
 //        print(indexPath)
 //        cell.menuImage.image = UIImage(named: blackMenuText[indexPath.item])

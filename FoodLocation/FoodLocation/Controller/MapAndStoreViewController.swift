@@ -24,10 +24,10 @@ class MapAndStoreViewController: UIViewController {
     let foodNameLabel = UILabel()
     let detailLabel = UILabel()
     
-    let storeName = UILabel()
-    let location = UILabel()
-    let foodName = UILabel()
-    let detail = UILabel()
+    var storeName = UILabel()
+    var location = UILabel()
+    var foodName = UILabel()
+    var detail = UILabel()
     var isSelected = false
     
     override func viewDidLoad() {
@@ -38,23 +38,9 @@ class MapAndStoreViewController: UIViewController {
         setMainView()
         
     }
-    
+
     @objc
     func likeLabelTap(_ sender: UITapGestureRecognizer) {
-        
-        let imageAttachment = NSTextAttachment()
-        imageAttachment.image = UIImage(systemName: "heart.fill")
-        let completeText = NSAttributedString(attachment: imageAttachment)
-        let font = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
-        let attachmentString = NSMutableAttributedString(string: "찜 ", attributes: font)
-        attachmentString.append(completeText)
-        likeLabel.attributedText = attachmentString
-        likeLabel.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
-        likeLabel.textAlignment = .right
-    }
-    
-    @objc
-    func likeLabelTap2(_ sender: UITapGestureRecognizer) {
         
         let imageAttachment = NSTextAttachment()
         imageAttachment.image = isSelected ? UIImage(systemName: "heart") : UIImage(systemName: "heart.fill")
@@ -195,14 +181,7 @@ extension MapAndStoreViewController {
         mainLabel.text = "맛있는 식당"
         mainLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         
-        
-//        let searchBarTaped = UITapGestureRecognizer(target: self, action: #selector(likeLabelTap(_:)))
-//        searchBarTaped.numberOfTouchesRequired = 1
-//        searchBarTaped.numberOfTapsRequired = 1
-//        likeLabel.addGestureRecognizer(searchBarTaped)
-//        likeLabel.isUserInteractionEnabled = true
-        
-        let searchBarTaped2 = UITapGestureRecognizer(target: self, action: #selector(likeLabelTap2(_:)))
+        let searchBarTaped2 = UITapGestureRecognizer(target: self, action: #selector(likeLabelTap(_:)))
 //        searchBarTaped2.numberOfTouchesRequired = 1 // 손가락 수 설정
 //        searchBarTaped2.numberOfTapsRequired = 1 // 터치 수 설정 ex 더블클릭같은,,
         likeLabel.addGestureRecognizer(searchBarTaped2)

@@ -26,8 +26,7 @@ class RegistrationTableViewController: UIViewController {
     let textField = UITextField()
     let Button = UIButton()
     var store = [Store]()
-   
-    
+    var naverText = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +41,9 @@ class RegistrationTableViewController: UIViewController {
         store.append(Store.init(storeName: "맛/수량/가격 \n상세설명", detailName: ["0"]))
         store.append(Store.init(storeName: "", detailName: ["0"]))
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
     @objc
     func closeTaped(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
@@ -50,6 +51,7 @@ class RegistrationTableViewController: UIViewController {
     @objc
     func setLocationButton(_ sender: UIButton) {
         let naverVC = NaverMapViewController()
+        naverVC.delegate = self
         naverVC.modalPresentationStyle = .fullScreen
         present(naverVC, animated: true, completion: nil)
         print(123)
@@ -88,10 +90,15 @@ extension RegistrationTableViewController: UITableViewDataSource {
         switch indexPath {
         case [0, 0]:
             cell.setStoreTextField()
+            cell.storeTextField.delegate = self
+            cell.storeTextField.tag = 1
         case [1, 0]:
             cell.setLocationTextField()
+            cell.locationTextField.delegate = self
+            cell.locationTextField.tag = 2
         case [1, 1]:
             cell.setDetailLocationTextField()
+            cell.locationTextField.delegate = self
         case [2, 0]:
             cell.setCollectionView()
         case [3, 0]:
@@ -114,7 +121,29 @@ extension RegistrationTableViewController: UITableViewDataSource {
 
 }
 
+
+//extension RegistrationTableViewController: UITextFieldDelegate, class {
+//    func textFieldDidChangeSelection(_ textField: UITextField) {
+//        guard let mapAndStoreVC = presentingViewController.self as? MapAndStoreViewController else{ fatalError() }
+//        guard let cell1 = menuTableView.cellForRow(at: [0, 0]) as? RegistrationTableViewCell else { fatalError() }
+//        guard let cell2 = menuTableView.cellForRow(at: [1, 0]) as? RegistrationTableViewCell else { fatalError() }
+//        switch textField.tag {
+//        case 0:
+//            mapAndStoreVC.storeName.text = cell1.storeTextField.text ?? ""
+//        case 1:
+//            mapAndStoreVC.location.text = cell2.locationTextField.text ?? ""
+//        default:
+//            fatalError()
+//        }
+//    }
+//}
+
+//protocol RegistrationTableViewControllerDelegate: class {
+//    func textFieldInput(text:String) //여기서 함수 구현 못한다 채택에서 해줘야됨
+//}
+
 extension RegistrationTableViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath {
         case [2, 0]:
@@ -132,6 +161,31 @@ extension RegistrationTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell1 = cell as? RegistrationTableViewCell else { fatalError() }
         print(cell1.storeTextField.text)
+    }
+}
+
+extension RegistrationTableViewController: NaverMapViewControllerDelegate, UITextFieldDelegate {
+    func textFieldInput(text: String) {
+        guard let label1 = menuTableView.cellForRow(at: [1, 0]) as? RegistrationTableViewCell else { fatalError() }
+        print(text)
+        label1.locationTextField.text = text
+    }
+
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let naverMapVC = presentingViewController as? MapAndStoreViewController else { fatalError() }
+        switch textField.tag {
+        case 1:
+           var number1 = textField.text ?? ""
+            
+        //            textField.text ?? "" // nil 병합 연산자
+        //            guard let text = textField.text else { return } // 옵셔널 바인딩
+        //            if let text1 = textField.text {
+        //            } // 옵셔널 바인딩
+        case 2:
+           var number2 = textField.text ?? ""
+        default:
+            fatalError()
+        }
     }
 }
 
