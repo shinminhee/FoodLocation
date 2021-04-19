@@ -20,28 +20,30 @@ class NaverMapViewController: UIViewController {
     let locationManager = CLLocationManager()
     var currentLatitude: Double = 0
     var currentLongtitude: Double = 0
-    let button = UIButton()
     let searchView = CustomView()
     let searchViewBackImage = UIImageView()
     let searchViewImage = UIImageView()
     let searchViewLabel = UILabel()
     weak var delegate: NaverMapViewControllerDelegate?
+    let spotImage = UIImageView()
+    var spotLatitude: String = ""
+    var spotLongtitude: String = ""
 
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: currentLatitude, lng: currentLongtitude))
+        cameraUpdate.animation = .fly
+        cameraUpdate.animationDuration = 1
+        self.mapView.moveCamera(cameraUpdate)
         setNaverMap()
         setupLocationManager()
         setUI()
         setCamera()
         setSearchView()
-        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: currentLatitude, lng: currentLongtitude))
-        cameraUpdate.animation = .fly
-        cameraUpdate.animationDuration = 1
-        self.mapView.moveCamera(cameraUpdate)
-
+        setSpot()
     }
     @objc
     func searchBarTaped(_ sender: UITapGestureRecognizer) {
@@ -77,8 +79,41 @@ extension NaverMapViewController: CLLocationManagerDelegate {
         currentLatitude = locations.last!.coordinate.latitude
         currentLongtitude = locations.last!.coordinate.longitude
     }
+
 }
 extension NaverMapViewController {
+    func setSpot() {
+        mapView.addSubview(spotImage)
+        spotImage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            spotImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            spotImage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            spotImage.widthAnchor.constraint(equalToConstant: 50),
+            spotImage.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        spotImage.backgroundColor = .clear
+        spotImage.image = UIImage(named: "spot")
+        let address = CLGeocoder()
+        var lat: Double = 0
+        var lng: Double = 0
+//        address.geocodeAddressString(addressLabel.text ?? "", completionHandler: { placemarks, error in
+//            guard let placemark = placemarks?.first!, let location = placemark.location else { return }
+//            print(location)
+//           lat = location.coordinate.latitude
+//           lng = location.coordinate.longitude
+//            let marker = NMFMarker(position: NMGLatLng(lat: lat, lng: lng), iconImage: <#T##NMFOverlayImage#>)
+//            marker.iconImage = NMF_MARKER_IMAGE_BLACK
+//            marker.iconTintColor = UIColor.red
+//            marker.width = 50
+//            marker.height = 50
+//            marker.mapView = self.mapView
+//            let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: lng))
+//            cameraUpdate.animation = .fly
+//            cameraUpdate.animationDuration = 1
+//            self.mapView.moveCamera(cameraUpdate)
+//
+//        })
+    }
     func setSearchView() {
         view.addSubview(searchView)
         [searchView, searchViewLabel, searchViewImage, searchViewBackImage].forEach { (view) in
@@ -124,6 +159,8 @@ extension NaverMapViewController {
         searchViewBackImage.image = UIImage(systemName: "list.bullet")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
     
     }
+    
+    // 현재위치 설정 델리게이트
     func setupLocationManager() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization() //권한 요청
@@ -133,7 +170,6 @@ extension NaverMapViewController {
     }
     func setNaverMap() {
             view.addSubview(mapView)
-            view.addSubview(button)
             mapView.translatesAutoresizingMaskIntoConstraints = false
             mapView.positionMode = .direction
             mapView.positionMode = .compass
@@ -144,17 +180,6 @@ extension NaverMapViewController {
                 mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
                 
             ])
-            
-            button.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                button.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                mapView.topAnchor.constraint(equalTo: view.topAnchor),
-                mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-                
-            ])
-            
-            
         }
     func setCamera() {
        

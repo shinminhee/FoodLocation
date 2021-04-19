@@ -29,6 +29,7 @@ class MapAndStoreViewController: UIViewController {
     var foodName = UILabel()
     var detail = UILabel()
     var isSelected = false
+    weak var delegate: MapAndStoreViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,7 @@ class MapAndStoreViewController: UIViewController {
         setMainView()
         
     }
-
+    
     @objc
     func likeLabelTap(_ sender: UITapGestureRecognizer) {
         
@@ -52,13 +53,55 @@ class MapAndStoreViewController: UIViewController {
         likeLabel.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         likeLabel.textAlignment = .right
         isSelected.toggle()
+        if isSelected == true {
+            MyStoreManager.shared.myStore.append("아무거나")
+        } else {
+            MyStoreManager.shared.myStore.removeAll() {
+                $0 == "아무거나"
+            }
+        }
+    
     }
+}
+protocol MapAndStoreViewControllerDelegate: class {
+    func textFieldDidChangeSelection(_ textField: UITextField)
+}
+
+extension MapAndStoreViewController: RegistrationTableViewControllerDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        switch textField.tag {
+        case 1:
+            var number2 = textField.text ?? ""
+            print(textField.text ?? "")
+            
+        //            guard let number1 = menuTableView.cellForRow(at: [0, 0]) as? RegistrationTableViewCell else { fatalError() }
+        //            number1.storeTextField.text = textField.text
+        //        case 2:
+        //           var number2 = textField.text ?? ""
+        //            print(textField.text ?? "")
+        //        case 3:
+        //           var number3 = textField.text ?? ""
+        //            print(textField.text ?? "")
+        //        case 4:
+        //           var number4 = textField.text ?? ""
+        //            print(textField.text ?? "")
+        //        case 5:
+        //           var number5 = textField.text ?? ""
+        //            print(textField.text ?? "")
+        
+        default:
+            fatalError()
+        }
+    }
+    
+    
 }
 
 extension MapAndStoreViewController {
     func setBottomView() {
-    
+        
     }
+    
     func setMap() {
         view.addSubview(mapView)
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -166,7 +209,7 @@ extension MapAndStoreViewController {
             likeLabel.topAnchor.constraint(equalTo: mainLabel.topAnchor, constant: 80),
             likeLabel.centerXAnchor.constraint(equalTo: mainView.centerXAnchor),
             likeLabel.widthAnchor.constraint(equalToConstant: 50),
-
+            
             
         ])
         
@@ -182,8 +225,8 @@ extension MapAndStoreViewController {
         mainLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         
         let searchBarTaped2 = UITapGestureRecognizer(target: self, action: #selector(likeLabelTap(_:)))
-//        searchBarTaped2.numberOfTouchesRequired = 1 // 손가락 수 설정
-//        searchBarTaped2.numberOfTapsRequired = 1 // 터치 수 설정 ex 더블클릭같은,,
+        //        searchBarTaped2.numberOfTouchesRequired = 1 // 손가락 수 설정
+        //        searchBarTaped2.numberOfTapsRequired = 1 // 터치 수 설정 ex 더블클릭같은,,
         likeLabel.addGestureRecognizer(searchBarTaped2)
         likeLabel.isUserInteractionEnabled = true
         
@@ -198,5 +241,5 @@ extension MapAndStoreViewController {
         likeLabel.textAlignment = .right
         
     }
-  
+    
 }

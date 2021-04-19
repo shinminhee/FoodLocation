@@ -72,6 +72,7 @@ extension RegistrationTableViewCell: UICollectionViewDataSource {
         cell.clipsToBounds = true
         cell.layer.cornerRadius = 15
         isSelected.toggle()
+        print(#function)
         
         return cell
     }
@@ -205,7 +206,6 @@ extension RegistrationTableViewCell {
     
     func setExplanationTextField() {
         self.contentView.addSubview(explanationTextField)
-        explanationTextField.delegate = self
         explanationTextField.text = "\n추가로 설명하기 \n추가로 설명하기"
         explanationTextField.textColor = UIColor.lightGray
         explanationTextField.textAlignment = .left

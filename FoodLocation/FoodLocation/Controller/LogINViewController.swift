@@ -31,6 +31,13 @@ class LogINViewController: UIViewController {
         configureUI()
         setGoogleSignInButton()
     }
+    func asd() {
+        if Auth.auth().currentUser?.uid == nil {
+            
+        } else {
+            configureUI()
+        }
+    }
     
     @objc
     func closeTaped(_ sender: UITapGestureRecognizer) {
