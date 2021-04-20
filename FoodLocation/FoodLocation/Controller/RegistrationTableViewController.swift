@@ -31,6 +31,8 @@ class RegistrationTableViewController: UIViewController {
     var storeNameText: String = ""
     var locationNameText: String = ""
     var detailLocationText: String = ""
+    var explanationText: String = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,8 +48,11 @@ class RegistrationTableViewController: UIViewController {
         store.append(Store.init(storeName: "", detailName: ["0"]))
     }
     override func viewWillAppear(_ animated: Bool) {
-        
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+         self.view.endEditing(true)
+        self.menuTableView.endEditing(true)
+   }
     @objc
     func closeTaped(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
@@ -66,6 +71,8 @@ class RegistrationTableViewController: UIViewController {
         mapView.modalPresentationStyle = .fullScreen
         mapView.delegate = self
         mapView.storeName.text = storeNameText
+        mapView.location.text = locationNameText
+        mapView.detail.text = explanationText
         present(mapView, animated: true, completion: nil)
         guard let cell = menuTableView.cellForRow(at: [3, 0]) as? RegistrationTableViewCell else { fatalError() }
         print(cell.detailLocationTextField.text)
@@ -102,11 +109,10 @@ extension RegistrationTableViewController: UITableViewDataSource {
         case [2, 0]:
             cell.setCollectionView()
             cell.locationTextField.delegate = self
-            cell.locationTextField.tag = 4
         case [3, 0]:
             cell.setExplanationTextField()
             cell.explanationTextField.delegate = self
-            cell.explanationTextField.tag = 5
+            cell.explanationTextField.tag = 4
         case [4, 0]:
             cell.setOkButton()
         default:
@@ -125,23 +131,6 @@ extension RegistrationTableViewController: UITableViewDataSource {
     
 }
 
-
-//extension RegistrationTableViewController: UITextFieldDelegate, class {
-//    func textFieldDidChangeSelection(_ textField: UITextField) {
-//        guard let mapAndStoreVC = presentingViewController.self as? MapAndStoreViewController else{ fatalError() }
-//        guard let cell1 = menuTableView.cellForRow(at: [0, 0]) as? RegistrationTableViewCell else { fatalError() }
-//        guard let cell2 = menuTableView.cellForRow(at: [1, 0]) as? RegistrationTableViewCell else { fatalError() }
-//        switch textField.tag {
-//        case 0:
-//            mapAndStoreVC.storeName.text = cell1.storeTextField.text ?? ""
-//        case 1:
-//            mapAndStoreVC.location.text = cell2.locationTextField.text ?? ""
-//        default:
-//            fatalError()
-//        }
-//    }
-//}
-
 extension RegistrationTableViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -156,7 +145,7 @@ extension RegistrationTableViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        guard let firstVC = presentingViewController as? MapAndStoreViewController else { fatalError() }
+//                guard let firstVC = presentingViewController as? MapAndStoreViewController else { fatalError() }
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -186,16 +175,13 @@ extension RegistrationTableViewController: NaverMapViewControllerDelegate, UITex
             guard let cell = menuTableView.cellForRow(at: [1, 1]) as? RegistrationTableViewCell else { fatalError() }
             detailLocationText = cell.detailLocationTextField.text ?? ""
         case 4:
-            var number4 = textField.text ?? ""
-            print(textField.text ?? "")
-        case 5:
-            var number5 = textField.text ?? ""
-            print(textField.text ?? "")
-            
+            guard let cell = menuTableView.cellForRow(at: [3, 0]) as? RegistrationTableViewCell else { fatalError() }
+            explanationText = cell.explanationTextField.text ?? ""
         default:
             fatalError()
         }
     }
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? RegistrationTableViewCell else { fatalError() }
         switch indexPath {
@@ -205,6 +191,8 @@ extension RegistrationTableViewController: NaverMapViewControllerDelegate, UITex
             cell.locationTextField.text = locationNameText
         case [1, 1]:
             cell.detailLocationTextField.text = detailLocationText
+        case [3, 0]:
+            cell.explanationTextField.text = explanationText
         default:
             return
         }

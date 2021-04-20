@@ -11,7 +11,7 @@ import UIKit
 class PersonalViewController: UIViewController {
     
     let backgroundView = UIView()
-    let logInLabel = UILabel()
+    var logInLabel = UILabel()
     
     let likeStoreLabel = UILabel()
     let regiStoreLabel = UILabel()
@@ -47,6 +47,7 @@ class PersonalViewController: UIViewController {
         view.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
         let rightBarButtonItem = UIBarButtonItem(image: (UIImage(systemName: "gearshape")), style: UIBarButtonItem.Style.plain, target: self, action: #selector(settingButton(_:)))
         navigationItem.rightBarButtonItem = rightBarButtonItem
+        
         setUI()
         setLike()
         setRegistration()
@@ -55,8 +56,6 @@ class PersonalViewController: UIViewController {
         setLayout()
 //        setRegiLayout()
 //        setRegiCollection()
-        
-        
     }
     
     @objc func logIn(_ sender: UIButton) {
@@ -82,24 +81,11 @@ class PersonalViewController: UIViewController {
         
     }
 }
-
-//extension PersonalViewController: NickNameViewControllerDelegate {
-//    func startButtonPressed(text: String) {
-//        let nickNameVC = NickNameViewController()
-//        self.emptyNickName = String(nickNameVC.nickNameTextField.text ?? "")
-//        logInLabel.text = "안녕하세요 \n\(String(describing: self.emptyNickName))님"
-//        nickNameVC.delegate = self
-//        dismiss(animated: true, completion: nil)
-//        print("123")
-//    }
-//}
   
 extension PersonalViewController: NickNameViewControllerDelegate {
     func startButtonPressed(text: String) {
+        print("가나다")
         logInLabel.text = text
-        let nickNameVC = NickNameViewController()
-        nickNameVC.delegate = self
-        print("123")
     }
 }
 
@@ -174,6 +160,7 @@ extension PersonalViewController {
         searchBarTaped.numberOfTapsRequired = 1
         logInLabel.addGestureRecognizer(searchBarTaped)
         logInLabel.isUserInteractionEnabled = true
+//        logInLabel.text = "안녕하세요"
         
     }
     

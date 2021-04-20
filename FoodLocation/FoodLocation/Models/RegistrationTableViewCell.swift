@@ -37,8 +37,7 @@ class RegistrationTableViewCell: UITableViewCell {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        
+    
     }
     func configure(row: Int) {
         self.row = row
@@ -84,8 +83,8 @@ extension RegistrationTableViewCell: UITextViewDelegate {
             explanationTextField.text = nil
             explanationTextField.textColor = UIColor.black
         }
-        
     }
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         if explanationTextField.text.isEmpty {
             explanationTextField.text = "추가로 설명하기 \n 추가로 설명하기"

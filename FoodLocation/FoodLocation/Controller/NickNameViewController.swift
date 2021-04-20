@@ -24,21 +24,22 @@ class NickNameViewController: UIViewController {
     @objc
     func startButton(_ sender: UIButton) {
         guard let text = nickNameTextField.text else {return}
-        self.delegate?.startButtonPressed(text: "신민희")
-        guard let nickName = nickNameTextField.text else { return }
-        var userList: [[String: String]]
-        if let tempList = UserDefaults.standard.array(forKey: "UserList") as? [[String:String]] {
-            userList = tempList
-        } else {
-            userList = []
-        }
-        let nickNameData: [String:String] = ["여기 닉네임을 입력해주세요.": nickName]
-        userList.append(nickNameData)
-        UserDefaults.standard.set(userList, forKey: "UserList")
-        self.view.window?.rootViewController?.dismiss(animated: false, completion: {
-        })
+        self.delegate?.startButtonPressed(text: text)
+        print(text)
+        self.view.window?.rootViewController?.dismiss(animated: false, completion: nil)
+//        guard let nickName = nickNameTextField.text else { return }
+//        var userList: [[String: String]]
+//        if let tempList = UserDefaults.standard.array(forKey: "UserList") as? [[String:String]] {
+//            userList = tempList
+//        } else {
+//            userList = []
+//        }
+//        let nickNameData: [String:String] = ["여기 닉네임을 입력해주세요.": nickName]
+//        userList.append(nickNameData)
+//        UserDefaults.standard.set(userList, forKey: "UserList")
         }
     }
+
 protocol NickNameViewControllerDelegate: class {
     func startButtonPressed(text: String)
 }
@@ -52,12 +53,6 @@ extension NickNameViewController: UITextFieldDelegate {
         return newLength <= limitLength
     }
 }
-
-//extension ViewController: LoginViewControllerDelegate {
-//    func textFieldInput() {
-//        nickNameTextField.text = ""
-//    }
-//}
 
 extension NickNameViewController {
     func setUI() {

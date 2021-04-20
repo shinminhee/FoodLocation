@@ -10,7 +10,7 @@ import NMapsMap
 
 
 class NaverMapViewController: UIViewController {
-
+    
     
     let mapView = NMFMapView()
     let okButton = UIButton()
@@ -18,6 +18,7 @@ class NaverMapViewController: UIViewController {
     let addressLabel = UILabel()
     let infoLabel = UILabel()
     let locationManager = CLLocationManager()
+    let spotManager = CLLocationManager()
     var currentLatitude: Double = 0
     var currentLongtitude: Double = 0
     let searchView = CustomView()
@@ -28,9 +29,9 @@ class NaverMapViewController: UIViewController {
     let spotImage = UIImageView()
     var spotLatitude: String = ""
     var spotLongtitude: String = ""
-
-
-
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
@@ -65,7 +66,7 @@ class NaverMapViewController: UIViewController {
         cameraUpdate.animation = .fly
         cameraUpdate.animationDuration = 1
         self.mapView.moveCamera(cameraUpdate)
-    
+        
     }
 }
 
@@ -78,10 +79,83 @@ extension NaverMapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLatitude = locations.last!.coordinate.latitude
         currentLongtitude = locations.last!.coordinate.longitude
-    }
+        if let coor = manager.location?.coordinate{
+            
+            let ceo: CLGeocoder = CLGeocoder()
+            currentLatitude = coor.latitude
+            currentLongtitude = coor.longitude
+            let loc: CLLocation = CLLocation(latitude: coor.latitude, longitude: coor.longitude)
+            ceo.reverseGeocodeLocation(loc, completionHandler:
+                                        {(placemarks, error) -> Void in
+                                            if error != nil {
+                                                NSLog("\(error)")
+                                                return
+                                            }
+                                            let coord = NMGLatLng(lat: self.currentLatitude, lng: self.currentLongtitude)
+                                            let cameraUpdate = NMFCameraUpdate(scrollTo: coord)
 
+//                                            cameraUpdate.animation = .fly
+//                                            cameraUpdate.animationDuration = 1
+//                                            self.mapView.positionMode = .direction
+                                            self.mapView.moveCamera(cameraUpdate)
+                                            guard let placemark = placemarks?.first,
+                                                  let addrList = placemark.addressDictionary?["FormattedAddressLines"] as? [String] else {
+                                                return
+                                            }
+                                            let address = addrList.joined(separator: " ")
+                                            self.addressLabel.text = address
+                                        })
+        }
+    }
+    
+    
+    
+    //            print("latitude" + String(coor.latitude) + "/ longitude" + String(coor.longitude))
+    //            let ceo: CLGeocoder = CLGeocoder()
+    //            currentLatitude = coor.latitude
+    //            currentLongtitude = coor.longitude
+    //            let loc: CLLocation = CLLocation(latitude: currentLatitude, longitude: currentLongtitude)
+    //            ceo.reverseGeocodeLocation(loc, completionHandler:
+    //                                        {(placemarks, error) in
+    //                                            if (error != nil)
+    //                                            {
+    //                                                print("reverse geodcode fail: \(error!.localizedDescription)")
+    //                                            }
+    //                                            let pm = placemarks! as [CLPlacemark]
+    //
+    //                                            if pm.count > 0 {
+    //                                                let pm = placemarks![0]
+    //                                                print(pm.country)
+    //                                                print(pm.locality)
+    //                                                print(pm.thoroughfare)
+    //                                                print(pm.postalCode)
+    //                                                print(pm.subThoroughfare)
+    //                                                var addressString : String = ""
+    //                                                if pm.country != nil {
+    //                                                    addressString = addressString + pm.country! + ", "
+    //                                                }
+    //                                                if pm.locality != nil {
+    //                                                    addressString = addressString + pm.locality! + ", "
+    //                                                }
+    //                                                if pm.thoroughfare != nil {
+    //                                                    addressString = addressString + pm.thoroughfare! + ", "
+    //                                                }
+    //                                                if pm.postalCode != nil {
+    //                                                    addressString = addressString + pm.postalCode! + " "
+    //                                                }
+    //
+    //                                                self.addressLabel.text = addressString
+    //                                            }
+    //                                        })
+    //        }
+    //    }
+    
+    
 }
+
 extension NaverMapViewController {
+    
+    
     func setSpot() {
         mapView.addSubview(spotImage)
         spotImage.translatesAutoresizingMaskIntoConstraints = false
@@ -93,27 +167,47 @@ extension NaverMapViewController {
         ])
         spotImage.backgroundColor = .clear
         spotImage.image = UIImage(named: "spot")
-        let address = CLGeocoder()
-        var lat: Double = 0
-        var lng: Double = 0
-//        address.geocodeAddressString(addressLabel.text ?? "", completionHandler: { placemarks, error in
-//            guard let placemark = placemarks?.first!, let location = placemark.location else { return }
-//            print(location)
-//           lat = location.coordinate.latitude
-//           lng = location.coordinate.longitude
-//            let marker = NMFMarker(position: NMGLatLng(lat: lat, lng: lng), iconImage: <#T##NMFOverlayImage#>)
-//            marker.iconImage = NMF_MARKER_IMAGE_BLACK
-//            marker.iconTintColor = UIColor.red
-//            marker.width = 50
-//            marker.height = 50
-//            marker.mapView = self.mapView
-//            let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: lng))
-//            cameraUpdate.animation = .fly
-//            cameraUpdate.animationDuration = 1
-//            self.mapView.moveCamera(cameraUpdate)
-//
-//        })
+        
     }
+    //
+    //        let address = CLGeocoder()
+    //        var lat: Double = 0
+    //        var lng: Double = 0
+    //        var center : CLLocationCoordinate2D = CLLocationCoordinate2D()
+    //        lat = center.latitude
+    //        lng = center.longitude
+    //        self.locationManager(self.spotManager, didUpdateLocations: [CLLocation(latitude: lat, longitude: lng)])
+    //        self.getAddressFromLatLon(pdblLatitude: "\(lat)", withLongitude: "\(lng)")
+    //
+    //        address.geocodeAddressString(addressLabel.text ?? "", completionHandler: { placemarks, error in
+    //            guard let placemark = placemarks?.first!, let location = placemark.location else { return }
+    //            print(location)
+    //            var center : CLLocationCoordinate2D = CLLocationCoordinate2D()
+    //            lat = center.latitude
+    //           lng = center.longitude
+    //            let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: lng))
+    //            cameraUpdate.animation = .fly
+    //            cameraUpdate.animationDuration = 1
+    //            self.mapView.moveCamera(cameraUpdate)
+    //
+    //        })
+    
+    //
+    //    func convertToAddressWith(coordinate: CLLocation) {
+    //        let geoCoder = CLGeocoder()
+    //        geoCoder.reverseGeocodeLocation(coordinate) { (placemarks, error) -> Void in
+    //            if error != nil {
+    //                NSLog("\(error)")
+    //                return
+    //            }
+    //            guard let placemark = placemarks?.first,
+    //                  let addrList = placemark.addressDictionary?["FormattedAddressLines"] as? [String] else {
+    //                return
+    //            }
+    //            let address = addrList.joined(separator: " ")
+    //            print(address)
+    //        }
+    //    }
     func setSearchView() {
         view.addSubview(searchView)
         [searchView, searchViewLabel, searchViewImage, searchViewBackImage].forEach { (view) in
@@ -157,32 +251,34 @@ extension NaverMapViewController {
         
         searchViewImage.image = UIImage(systemName: "magnifyingglass")?.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
         searchViewBackImage.image = UIImage(systemName: "list.bullet")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
-    
+        
     }
     
     // 현재위치 설정 델리게이트
     func setupLocationManager() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization() //권한 요청
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest // 배터리에 맞게 권장되는 최적의 정확도
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.startUpdatingLocation()
     }
+    
     func setNaverMap() {
-            view.addSubview(mapView)
-            mapView.translatesAutoresizingMaskIntoConstraints = false
-            mapView.positionMode = .direction
-            mapView.positionMode = .compass
-            NSLayoutConstraint.activate([
-                mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                mapView.topAnchor.constraint(equalTo: view.topAnchor),
-                mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-                
-            ])
-        }
+        view.addSubview(mapView)
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.positionMode = .direction
+        mapView.positionMode = .compass
+        NSLayoutConstraint.activate([
+            mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            mapView.topAnchor.constraint(equalTo: view.topAnchor),
+            mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            
+        ])
+        
+    }
     func setCamera() {
-       
+        
     }
     
     func setUI() {
@@ -190,30 +286,30 @@ extension NaverMapViewController {
             self.view.addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false
         }
+        
+        NSLayoutConstraint.activate([
             
-            NSLayoutConstraint.activate([
-                
-                infoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
-                infoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                infoLabel.widthAnchor.constraint(equalToConstant: 200),
-                infoLabel.heightAnchor.constraint(equalToConstant: 30),
-                
-                locationButton.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 400),
-                locationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 300),
-                locationButton.heightAnchor.constraint(equalToConstant: 60),
-                locationButton.widthAnchor.constraint(equalToConstant: 60),
-                
-                addressLabel.topAnchor.constraint(equalTo: locationButton.bottomAnchor, constant: 10),
-                addressLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                addressLabel.widthAnchor.constraint(equalToConstant: 300),
-                addressLabel.heightAnchor.constraint(equalToConstant: 60),
-                
-                okButton.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 10),
-                okButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                okButton.widthAnchor.constraint(equalToConstant: 300),
-                okButton.heightAnchor.constraint(equalToConstant: 60),
+            infoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
+            infoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            infoLabel.widthAnchor.constraint(equalToConstant: 200),
+            infoLabel.heightAnchor.constraint(equalToConstant: 30),
             
-            ])
+            locationButton.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 400),
+            locationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 300),
+            locationButton.heightAnchor.constraint(equalToConstant: 60),
+            locationButton.widthAnchor.constraint(equalToConstant: 60),
+            
+            addressLabel.topAnchor.constraint(equalTo: locationButton.bottomAnchor, constant: 10),
+            addressLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            addressLabel.widthAnchor.constraint(equalToConstant: 300),
+            addressLabel.heightAnchor.constraint(equalToConstant: 60),
+            
+            okButton.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 10),
+            okButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            okButton.widthAnchor.constraint(equalToConstant: 300),
+            okButton.heightAnchor.constraint(equalToConstant: 60),
+            
+        ])
         
         
         infoLabel.backgroundColor = .white
@@ -222,8 +318,8 @@ extension NaverMapViewController {
         infoLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         
         addressLabel.backgroundColor = .white
-
-
+        
+        
         okButton.setTitle("확인", for: .normal)
         okButton.setTitleColor(.black, for: .normal)
         okButton.layer.cornerRadius = 10
@@ -244,5 +340,5 @@ extension NaverMapViewController {
         locationButton.addTarget(self, action: #selector(locationButtonTaped(_:)), for: .touchUpInside)
     }
     
- 
+    
 }

@@ -13,6 +13,7 @@ import NMapsMap
 class MapAndStoreViewController: UIViewController {
     
     let mapView = NMFMapView()
+    let closeButton = UIImageView()
     let infoView = UIView()
     let redView = UIImageView()
     let mainView = UIView()
@@ -37,7 +38,12 @@ class MapAndStoreViewController: UIViewController {
         setMap()
         setInfoView()
         setMainView()
+        setCloseButton()
         
+    }
+    @objc
+    func closeTaped(_ sender: UITapGestureRecognizer) {
+        dismiss(animated: true, completion: nil)
     }
     
     @objc
@@ -100,6 +106,22 @@ extension MapAndStoreViewController: RegistrationTableViewControllerDelegate {
 extension MapAndStoreViewController {
     func setBottomView() {
         
+    }
+    func setCloseButton()  {
+        view.addSubview(closeButton)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            closeButton.heightAnchor.constraint(equalToConstant: 30),
+            closeButton.widthAnchor.constraint(equalToConstant: 30)
+        ])
+        closeButton.image = UIImage(systemName: "xmark")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+        let searchBarTaped = UITapGestureRecognizer(target: self, action: #selector(closeTaped(_:)))
+        searchBarTaped.numberOfTouchesRequired = 1
+        searchBarTaped.numberOfTapsRequired = 1
+        closeButton.addGestureRecognizer(searchBarTaped)
+        closeButton.isUserInteractionEnabled = true
     }
     
     func setMap() {
