@@ -71,7 +71,6 @@ extension ViewController {
     }
     private func setUI() {
         view.addSubview(mapView)
-        view.addSubview(button)
         mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.positionMode = .direction
         mapView.positionMode = .compass
@@ -82,17 +81,6 @@ extension ViewController {
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             
         ])
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            button.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            mapView.topAnchor.constraint(equalTo: view.topAnchor),
-            mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            
-        ])
-        
-        
     }
     
     func setSearchView() {

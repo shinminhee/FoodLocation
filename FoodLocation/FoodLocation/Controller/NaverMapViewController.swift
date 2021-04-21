@@ -84,7 +84,7 @@ extension NaverMapViewController: CLLocationManagerDelegate {
             let ceo: CLGeocoder = CLGeocoder()
             currentLatitude = coor.latitude
             currentLongtitude = coor.longitude
-            let loc: CLLocation = CLLocation(latitude: coor.latitude, longitude: coor.longitude)
+            let loc: CLLocation = CLLocation(latitude: coor.latitude, longitude: coor.longitude) // 이거 mapAndStore뷰컨으로 보내야됨
             ceo.reverseGeocodeLocation(loc, completionHandler:
                                         {(placemarks, error) -> Void in
                                             if error != nil {

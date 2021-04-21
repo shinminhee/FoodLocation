@@ -61,49 +61,39 @@ extension RegistrationTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RegistrationCollectionViewCell.identifier, for: indexPath) as? RegistrationCollectionViewCell else { fatalError() }
         cell.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
-        cell.menuImage.image = isSelected ?  UIImage(named: blackMenuText[indexPath.item]) : UIImage(named: menuText[indexPath.item])
-               if indexPath.item == 0 {
-                   cell.isSelected = true
-               }
-//        cell.menuImage.image = isSelected ? UIImage(named: blackMenuText[indexPath.item]) : UIImage(named: menuText[indexPath.item])
-//        cell.menuImage.image = UIImage(named: blackMenuText[indexPath.item])
+        cell.menuImage.image = UIImage(named: blackMenuText[indexPath.item])
         cell.menuLabel.text = menuText[indexPath.row]
         cell.clipsToBounds = true
         cell.layer.cornerRadius = 15
-        isSelected.toggle()
+        cell.row = indexPath.row
         print(#function)
         
         return cell
     }
 }
-extension RegistrationTableViewCell: UITextViewDelegate {
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if explanationTextField.textColor == UIColor.lightGray {
-            explanationTextField.text = nil
-            explanationTextField.textColor = UIColor.black
-        }
+extension RegistrationTableViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RegistrationCollectionViewCell.identifier, for: indexPath) as? RegistrationCollectionViewCell else { fatalError() }
+        cell.backgroundColor = UIColor(displayP3Red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
+        cell.menuImage.image = UIImage(named: menuText[indexPath.item])
+        cell.isClicked = true
+        print(#function)
     }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if explanationTextField.text.isEmpty {
-            explanationTextField.text = "추가로 설명하기 \n 추가로 설명하기"
+}
+
+
+
+
+extension RegistrationTableViewCell {
+    func textViewSetupView() {
+        if explanationTextField.text == "\n추가로 설명하기 \n추가로 설명하기" {
+            explanationTextField.text = ""
+            explanationTextField.textColor = UIColor.black
+        } else if explanationTextField.text == "" {
+            explanationTextField.text = "\n추가로 설명하기 \n추가로 설명하기"
             explanationTextField.textColor = UIColor.lightGray
         }
     }
-}
-
-extension RegistrationTableViewCell: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell1 = collectionView.cellForItem(at: indexPath) as? RegistrationCollectionViewCell else { fatalError() }
-//        cell1.menuImage.image = UIImage(named: menuText[indexPath.item])
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RegistrationCollectionViewCell.identifier, for: indexPath) as? RegistrationCollectionViewCell else { fatalError() }
-//        print(indexPath)
-//        cell.menuImage.image = UIImage(named: blackMenuText[indexPath.item])
-    }
-}
-
-extension RegistrationTableViewCell {
     func setCollectionView() {
         guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { fatalError() }
         layout.itemSize = CGSize(width: 80, height: 80)
@@ -214,6 +204,7 @@ extension RegistrationTableViewCell {
         explanationTextField.layer.borderWidth = 0.1
         explanationTextField.layer.borderColor = UIColor.gray.cgColor
         explanationTextField.layer.cornerRadius = 10
+//        explanationTextField.delegate = self
         explanationTextField.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([

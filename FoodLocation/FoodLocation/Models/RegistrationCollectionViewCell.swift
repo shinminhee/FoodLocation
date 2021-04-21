@@ -14,17 +14,35 @@ class RegistrationCollectionViewCell: UICollectionViewCell {
     let menuLabel = UILabel()
     let menuText = ["붕어빵", "풀빵", "호두과자", "땅콩빵", "계란빵", "바나나빵", "타코야키", "호떡", "떡볶이", "튀김", "순대", "어묵"]
     let blackMenuText = ["흑붕어빵", "흑풀빵", "흑호두과자", "흑땅콩빵", "흑계란빵", "흑바나나빵", "흑타코야키", "흑호떡", "흑떡볶이", "흑튀김", "흑순대", "흑어묵"]
-    
-    override var isSelected: Bool {
-            didSet{
-                if isSelected {
-                    menuImage.image = UIImage(named: blackMenuText[Int()])
-                }
-                else {
-                    menuImage.image = UIImage(named: menuText[Int()])
-                }
-            }
+    var row = 0 {
+        willSet {
+            print(newValue)
         }
+    }
+    
+    var isClicked: Bool = false 
+//        willSet {
+//            if newValue {
+//                print(true)
+//                menuImage.image = UIImage(named: menuText[row])
+//            }
+//            else {
+//                print(false)
+//                menuImage.image = UIImage(named: blackMenuText[row])
+//            }
+//        }
+//    }
+    
+//    override var isSelected: Bool {
+//            willSet {
+//                if newValue {
+//                    menuImage.image = UIImage(named: menuText[row]) // 배열 꺼내 쓰는 방법
+//                }
+//                else {
+//                    menuImage.image = UIImage(named: blackMenuText[row])
+//                }
+//            }
+//        }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

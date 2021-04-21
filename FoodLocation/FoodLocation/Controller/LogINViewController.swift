@@ -16,7 +16,16 @@ class LogINViewController: UIViewController {
     let closeButton = UIImageView()
     let googleLoginButton = GIDSignInButton()
     var emptyNickName: String? = ""
+    let nickVC: NickNameViewController
     
+    init(nickVC: NickNameViewController) {
+        self.nickVC = nickVC
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     
     override func viewDidLoad() {
@@ -69,9 +78,9 @@ extension LogINViewController: GIDSignInDelegate {
             print("User Email : \(email)")
             print("User Name : \((fullName))")
             let nickNameVC = NickNameViewController()
-            nickNameVC.modalPresentationStyle = .fullScreen
+            nickVC.modalPresentationStyle = .fullScreen
 //            nickNameVC.delegate = self
-            present(nickNameVC,animated: true, completion: nil)
+        present(nickVC,animated: true, completion: nil)
         } else {
             print("Error : User Data Not Found")
         }

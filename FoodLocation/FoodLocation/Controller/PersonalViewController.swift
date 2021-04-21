@@ -39,6 +39,7 @@ class PersonalViewController: UIViewController {
     lazy var regiCollectionView = UICollectionView(frame: .zero, collectionViewLayout: regiCollectionLayout)
     
     var emptyNickName: String? = ""
+    let nickVC = NickNameViewController()
 
     
     
@@ -59,7 +60,8 @@ class PersonalViewController: UIViewController {
     }
     
     @objc func logIn(_ sender: UIButton) {
-        let logInVC = LogINViewController()
+        let logInVC = LogINViewController(nickVC: nickVC)
+        nickVC.delegate = self
         logInVC.modalPresentationStyle = .fullScreen
         present(logInVC, animated: true, completion: nil)
     }

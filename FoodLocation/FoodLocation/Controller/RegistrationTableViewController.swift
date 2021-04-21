@@ -63,7 +63,6 @@ class RegistrationTableViewController: UIViewController {
         naverVC.delegate = self
         naverVC.modalPresentationStyle = .fullScreen
         present(naverVC, animated: true, completion: nil)
-        print(123)
     }
     @objc
     func okButtonTaped(_ sender: UIButton) {
@@ -108,7 +107,6 @@ extension RegistrationTableViewController: UITableViewDataSource {
             cell.detailLocationTextField.tag = 3
         case [2, 0]:
             cell.setCollectionView()
-            cell.locationTextField.delegate = self
         case [3, 0]:
             cell.setExplanationTextField()
             cell.explanationTextField.delegate = self
@@ -155,7 +153,7 @@ extension RegistrationTableViewController: UITableViewDelegate {
 }
 
 
-extension RegistrationTableViewController: NaverMapViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate, MapAndStoreViewControllerDelegate {
+extension RegistrationTableViewController: NaverMapViewControllerDelegate, UITextFieldDelegate, MapAndStoreViewControllerDelegate {
     func textFieldInput(text: String) {
         guard let label1 = menuTableView.cellForRow(at: [1, 0]) as? RegistrationTableViewCell else { fatalError() }
         print(text)
@@ -198,6 +196,34 @@ extension RegistrationTableViewController: NaverMapViewControllerDelegate, UITex
         }
         
     }
+}
+
+extension RegistrationTableViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        
+        if textView.text == "\n추가로 설명하기 \n추가로 설명하기" {
+            print("비게해라")
+//            textView.text = ""
+//            textView.textColor = UIColor.black
+        } else if textView.text == "" {
+            print("안 비게해라")
+
+//            textView.text = "\n추가로 설명하기 \n추가로 설명하기"
+//            textView.textColor = UIColor.lightGray
+        }
+    }
+//    func textViewDidEndEditing(_ textView: UITextView) {
+//        if explanationTextField.text == "" {
+//            textViewSetupView()
+//        }
+//    }
+//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        if text == "\n" {
+//            explanationTextField.resignFirstResponder()
+//        }
+//        return true
+//    }
 }
 
 extension RegistrationTableViewController {

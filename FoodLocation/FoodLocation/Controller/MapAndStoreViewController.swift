@@ -8,6 +8,8 @@
 // 가게이름, 위치, 주문음식, 상세 내용
 
 import UIKit
+import MapKit
+import WebKit
 import NMapsMap
 
 class MapAndStoreViewController: UIViewController {
@@ -31,6 +33,11 @@ class MapAndStoreViewController: UIViewController {
     var detail = UILabel()
     var isSelected = false
     weak var delegate: MapAndStoreViewControllerDelegate?
+    var currentLatitude: Double = 0
+    var currentLongtitude: Double = 0
+    var address = ""
+    let contentController = WKUserContentController()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +46,8 @@ class MapAndStoreViewController: UIViewController {
         setInfoView()
         setMainView()
         setCloseButton()
-        
+        contentController.add(self, name: "WKScriptMessageHandler")
+
     }
     @objc
     func closeTaped(_ sender: UITapGestureRecognizer) {
@@ -73,6 +81,43 @@ protocol MapAndStoreViewControllerDelegate: class {
     func textFieldDidChangeSelection(_ textField: UITextField)
 }
 
+extension MapAndStoreViewController: WKScriptMessageHandler {
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        guard let tableViewCell = presentingViewController as? RegistrationTableViewController else { return }
+        guard let tableVC = tableViewCell.menuTableView.cellForRow(at: [1, 0]) as? RegistrationTableViewCell else { fatalError() }
+        if let data = message.body as? [String: Any] {
+            address = data[tableVC.locationTextField.text ?? ""] as? String ?? ""
+        }
+        tableVC.locationTextField.text = address
+        self.dismiss(animated: true) {
+            let address = CLGeocoder()
+            var lat: Double = 0
+            var lng: Double = 0
+            address.geocodeAddressString(tableVC.locationTextField.text ?? "", completionHandler: { placemarks, error in
+                guard let placemark = placemarks?.first!, let location = placemark.location else { return }
+                print(location)
+               lat = location.coordinate.latitude
+               lng = location.coordinate.longitude
+                let marker = NMFMarker()
+                marker.position = NMGLatLng(lat: lat, lng: lng)
+                marker.iconImage = NMF_MARKER_IMAGE_BLACK
+                marker.iconTintColor = UIColor.red
+                marker.width = 50
+                marker.height = 50
+                marker.mapView = self.mapView
+                let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: lng))
+                cameraUpdate.animation = .fly
+                cameraUpdate.animationDuration = 1
+                self.mapView.moveCamera(cameraUpdate)
+                
+            })
+        }
+        
+        
+    }
+}
+
 extension MapAndStoreViewController: RegistrationTableViewControllerDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         switch textField.tag {
@@ -104,6 +149,7 @@ extension MapAndStoreViewController: RegistrationTableViewControllerDelegate {
 }
 
 extension MapAndStoreViewController {
+   
     func setBottomView() {
         
     }
@@ -218,7 +264,6 @@ extension MapAndStoreViewController {
         }
         
         NSLayoutConstraint.activate([
-            
             mainView.topAnchor.constraint(equalTo: view.topAnchor, constant: 250),
             mainView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             mainView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
@@ -231,8 +276,6 @@ extension MapAndStoreViewController {
             likeLabel.topAnchor.constraint(equalTo: mainLabel.topAnchor, constant: 80),
             likeLabel.centerXAnchor.constraint(equalTo: mainView.centerXAnchor),
             likeLabel.widthAnchor.constraint(equalToConstant: 50),
-            
-            
         ])
         
         mainView.backgroundColor = .white
