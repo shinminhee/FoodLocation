@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class Store {
     var storeName: String?
@@ -227,6 +228,7 @@ extension RegistrationTableViewController: UITextViewDelegate {
 }
 
 extension RegistrationTableViewController {
+  
     func setTableView() {
         view.addSubview(menuTableView)
         menuTableView.translatesAutoresizingMaskIntoConstraints = false

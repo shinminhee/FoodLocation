@@ -23,27 +23,30 @@ class NickNameViewController: UIViewController {
     
     @objc
     func startButton(_ sender: UIButton) {
-        guard let text = nickNameTextField.text else {return}
+        guard let text = nickNameTextField.text else { return }
         self.delegate?.startButtonPressed(text: text)
-        print(text)
-        self.view.window?.rootViewController?.dismiss(animated: false, completion: nil)
-//        guard let nickName = nickNameTextField.text else { return }
-//        var userList: [[String: String]]
-//        if let tempList = UserDefaults.standard.array(forKey: "UserList") as? [[String:String]] {
-//            userList = tempList
-//        } else {
-//            userList = []
-//        }
-//        let nickNameData: [String:String] = ["여기 닉네임을 입력해주세요.": nickName]
-//        userList.append(nickNameData)
-//        UserDefaults.standard.set(userList, forKey: "UserList")
+        if text.isEmpty {
+            UIView.animate(withDuration: 1.5, animations: {
+                self.nickNameTextField.backgroundColor = .red
+                self.nickNameTextField.placeholder = "최소 한 글자는 입력해야 합니다."
+            }, completion: { _ in
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.nickNameTextField.backgroundColor = .white
+                    self.nickNameTextField.placeholder = "여기 닉네임을 입력해주세요."
+                })
+            })
+        } else {
+            self.view.window?.rootViewController?.dismiss(animated: false, completion: nil)
         }
     }
+}
 
+// 닉네임 personalVC으로 넘김
 protocol NickNameViewControllerDelegate: class {
     func startButtonPressed(text: String)
 }
 
+// 닉네임 글자수 제한
 extension NickNameViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -103,3 +106,13 @@ extension NickNameViewController {
 }
 
 
+//        guard let nickName = nickNameTextField.text else { return }
+//        var userList: [[String: String]]
+//        if let tempList = UserDefaults.standard.array(forKey: "UserList") as? [[String:String]] {
+//            userList = tempList
+//        } else {
+//            userList = []
+//        }
+//        let nickNameData: [String:String] = ["여기 닉네임을 입력해주세요.": nickName]
+//        userList.append(nickNameData)
+//        UserDefaults.standard.set(userList, forKey: "UserList")

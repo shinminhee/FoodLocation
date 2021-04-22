@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		5624714164E8AAE2C9E04D55 /* Pods_FoodLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 577D48C04F97BAFD8A6E7A43 /* Pods_FoodLocation.framework */; };
 		5E18CD84262D71FC002A3CFD /* MyStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18CD83262D71FC002A3CFD /* MyStoreManager.swift */; };
+		5E18CD8926313D74002A3CFD /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18CD8826313D74002A3CFD /* Test.swift */; };
+		5E18CD8C26314BA3002A3CFD /* LogOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18CD8B26314BA3002A3CFD /* LogOutViewController.swift */; };
+		5E18CD8F263169C8002A3CFD /* NeedLogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18CD8E263169C8002A3CFD /* NeedLogInView.swift */; };
 		5E4E0267260F25DE001FF770 /* RegistrationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E0266260F25DE001FF770 /* RegistrationTableViewCell.swift */; };
 		5E4E026A260F2660001FF770 /* RegistrationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E0269260F2660001FF770 /* RegistrationTableViewController.swift */; };
 		5E4E029726159F0F001FF770 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E029626159F0F001FF770 /* GoogleService-Info.plist */; };
@@ -39,6 +42,9 @@
 /* Begin PBXFileReference section */
 		577D48C04F97BAFD8A6E7A43 /* Pods_FoodLocation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodLocation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E18CD83262D71FC002A3CFD /* MyStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoreManager.swift; sourceTree = "<group>"; };
+		5E18CD8826313D74002A3CFD /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		5E18CD8B26314BA3002A3CFD /* LogOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutViewController.swift; sourceTree = "<group>"; };
+		5E18CD8E263169C8002A3CFD /* NeedLogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedLogInView.swift; sourceTree = "<group>"; };
 		5E4E0266260F25DE001FF770 /* RegistrationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTableViewCell.swift; sourceTree = "<group>"; };
 		5E4E0269260F2660001FF770 /* RegistrationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTableViewController.swift; sourceTree = "<group>"; };
 		5E4E029626159F0F001FF770 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -134,6 +140,7 @@
 				5E4E02F12619CE13001FF770 /* MyCommentViewController.swift */,
 				5E4E02F42619D166001FF770 /* MyFavoriteViewController.swift */,
 				5ECA5DD8262548EB00E7AD2D /* MapAndStoreViewController.swift */,
+				5E18CD8B26314BA3002A3CFD /* LogOutViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -154,6 +161,8 @@
 				5E4E02EA2619C3DB001FF770 /* CustomCollectionViewCell.swift */,
 				5E4E0352261F029B001FF770 /* MyRegistrationCollectionViewCell.swift */,
 				5E18CD83262D71FC002A3CFD /* MyStoreManager.swift */,
+				5E18CD8E263169C8002A3CFD /* NeedLogInView.swift */,
+				5E18CD8826313D74002A3CFD /* Test.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -309,9 +318,11 @@
 			files = (
 				5E808447260C4B9700BA75FB /* LocationViewController.swift in Sources */,
 				5E4E0323261C1F63001FF770 /* RegistrationCollectionViewCell.swift in Sources */,
+				5E18CD8F263169C8002A3CFD /* NeedLogInView.swift in Sources */,
 				5E4E0326261C59BA001FF770 /* NaverMapViewController.swift in Sources */,
 				5ECA5DD9262548EB00E7AD2D /* MapAndStoreViewController.swift in Sources */,
 				5E808441260C43B200BA75FB /* StoreViewController.swift in Sources */,
+				5E18CD8926313D74002A3CFD /* Test.swift in Sources */,
 				5E4E0353261F029B001FF770 /* MyRegistrationCollectionViewCell.swift in Sources */,
 				5E80843D260C2EEB00BA75FB /* SearchView.swift in Sources */,
 				5E808427260C0B2400BA75FB /* ViewController.swift in Sources */,
@@ -329,6 +340,7 @@
 				5E4E026A260F2660001FF770 /* RegistrationTableViewController.swift in Sources */,
 				5E808444260C43C100BA75FB /* PersonalViewController.swift in Sources */,
 				5E4E0267260F25DE001FF770 /* RegistrationTableViewCell.swift in Sources */,
+				5E18CD8C26314BA3002A3CFD /* LogOutViewController.swift in Sources */,
 				5E808425260C0B2400BA75FB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

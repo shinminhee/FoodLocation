@@ -16,7 +16,7 @@ class LogINViewController: UIViewController {
     let closeButton = UIImageView()
     let googleLoginButton = GIDSignInButton()
     var emptyNickName: String? = ""
-    let nickVC: NickNameViewController
+    let nickVC: NickNameViewController?
     
     init(nickVC: NickNameViewController) {
         self.nickVC = nickVC
@@ -26,7 +26,6 @@ class LogINViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +39,8 @@ class LogINViewController: UIViewController {
         configureUI()
         setGoogleSignInButton()
     }
-    func asd() {
+    
+    func setUserStatus() {
         if Auth.auth().currentUser?.uid == nil {
             
         } else {
@@ -64,26 +64,33 @@ extension LogINViewController: GIDSignInDelegate {
             }
             return
         }
-            
-        // 사용자 정보 가져오기
-        if let userId = user.userID,
-            let idToken = user.authentication.idToken,
-            let fullName = user.profile.name,
-            let givenName = user.profile.givenName,
-            let familyName = user.profile.familyName,
-            let email = user.profile.email {
-                
-            print("Token : \(idToken)")
-            print("User ID : \(userId)")
-            print("User Email : \(email)")
-            print("User Name : \((fullName))")
-            let nickNameVC = NickNameViewController()
-            nickVC.modalPresentationStyle = .fullScreen
-//            nickNameVC.delegate = self
-        present(nickVC,animated: true, completion: nil)
-        } else {
-            print("Error : User Data Not Found")
-        }
+        guard let authentication = user.authentication else { return }
+            let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                           accessToken: authentication.accessToken)
+        Auth.auth().signIn(with: credential) { [self] (authResult, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    print("Login Successful")
+                    if let userId = user.userID,
+                               let idToken = user.authentication.idToken,
+                               let fullName = user.profile.name,
+                               let givenName = user.profile.givenName,
+                               let familyName = user.profile.familyName,
+                               let email = user.profile.email {
+                   
+                               print("Token : \(idToken)")
+                               print("User ID : \(userId)")
+                               print("User Email : \(email)")
+                               print("User Name : \((fullName))")
+                   
+                        self.nickVC?.modalPresentationStyle = .fullScreen
+                               present(nickVC!,animated: true, completion: nil)
+                           } else {
+                               print("Error : User Data Not Found")
+                           }
+                }
+            }
     }
         
     // 구글 로그인 연동 해제했을때 불러오는 메소드
@@ -91,16 +98,6 @@ extension LogINViewController: GIDSignInDelegate {
         print("Disconnect")
     }
 }
-
-//extension LogINViewController: NickNameViewControllerDelegate {
-//    func startButtonPressed() {
-//        let personalVC = PersonalViewController()
-//        let nickNameVC = NickNameViewController()
-//        self.emptyNickName = String(nickNameVC.nickNameTextField.text ?? "")
-//        personalVC.logInLabel.text = "안녕하세요 \n\(String(describing: self.emptyNickName))님"
-//        dismiss(animated: true, completion: nil)
-//    }
-//}
 
 extension LogINViewController {
     private func configureUI() {

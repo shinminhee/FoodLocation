@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class StoreViewController: UIViewController {
     
@@ -20,14 +21,30 @@ class StoreViewController: UIViewController {
         setUI()
 
     }
+    
     @objc func logIn(_ sender: UIButton) {
-        let logInVC = RegistrationTableViewController()
-        logInVC.modalPresentationStyle = .fullScreen
-        present(logInVC, animated: true, completion: nil)
+        if Auth.auth().currentUser?.uid == nil {
+            setData()
+            
+        } else {
+            let logInVC = RegistrationTableViewController()
+            logInVC.modalPresentationStyle = .fullScreen
+            present(logInVC, animated: true, completion: nil)
+        }
     }
 }
 
 extension StoreViewController {
+    
+    func setData() {
+        view.addSubview(NeedLogInView(view: view))
+        NeedLogInView.animate(withDuration: 1) {
+            self.view.alpha = 0.9
+        } completion: { _ in
+            self.view.alpha = 0
+        }
+    }
+    
     func setUI() {
         [storeImage, registrationLabel, smallLabel, registrationButton].forEach { (view) in
             self.view.addSubview(view)

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import GoogleSignIn
 
 
 class PersonalViewController: UIViewController {
@@ -55,16 +57,23 @@ class PersonalViewController: UIViewController {
         setComment()
         setCollection()
         setLayout()
-//        setRegiLayout()
-//        setRegiCollection()
+
     }
     
     @objc func logIn(_ sender: UIButton) {
-        let logInVC = LogINViewController(nickVC: nickVC)
-        nickVC.delegate = self
-        logInVC.modalPresentationStyle = .fullScreen
-        present(logInVC, animated: true, completion: nil)
+        if Auth.auth().currentUser?.uid == nil {
+            let logInVC = LogINViewController(nickVC: nickVC)
+            nickVC.delegate = self
+            logInVC.modalPresentationStyle = .fullScreen
+            present(logInVC, animated: true, completion: nil)
+        } else {
+            let logOutVC = LogOutViewController()
+            logOutVC.delegate = self
+            logOutVC.modalPresentationStyle = .fullScreen
+            present(logOutVC, animated: true, completion: nil)
+        }
     }
+    
     @objc func plusStore(_ sender: UITapGestureRecognizer) {
         let logInVC = MyStoreViewController()
         self.navigationController?.pushViewController(logInVC, animated: true)
@@ -80,14 +89,44 @@ class PersonalViewController: UIViewController {
     @objc
     func settingButton(_ sender: UIBarButtonItem) {
         self.navigationController?.pushViewController(SettingViewController(), animated: true)
-        
     }
 }
+extension PersonalViewController: LogOutViewControllerDelegate {
+    func logOutButtonPressed(text: String) {
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = UIImage(systemName: "chevron.right")
+        let font = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 25)]
+        //이미지 추가 같은 타입으로 설정
+        let attachmentString = NSAttributedString(attachment: imageAttachment)
+        //글자 만들기
+        let completeText = NSMutableAttributedString(string: "로그인이 \n필요해요  ", attributes: font)
+        //글자에 이미지 추가
+        completeText.append(attachmentString)
+        logInLabel.attributedText = completeText
+        logInLabel.textAlignment = .left
+        logInLabel.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+        logInLabel.numberOfLines = 0
+    }
+  
+}
+
   
 extension PersonalViewController: NickNameViewControllerDelegate {
     func startButtonPressed(text: String) {
-        print("가나다")
-        logInLabel.text = text
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = UIImage(systemName: "chevron.right")
+        let font = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 25)]
+        //이미지 추가 같은 타입으로 설정
+        let attachmentString = NSAttributedString(attachment: imageAttachment)
+        //글자 만들기
+        let completeText = NSMutableAttributedString(string: "안녕하세요 \n\(text)님  ", attributes: font)
+        //글자에 이미지 추가
+        completeText.append(attachmentString)
+        logInLabel.attributedText = completeText
+        logInLabel.textAlignment = .left
+        logInLabel.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+        logInLabel.numberOfLines = 0
+        
     }
 }
 
@@ -143,20 +182,24 @@ extension PersonalViewController {
         backgroundView.layer.shadowRadius = 5 // 반경
         backgroundView.layer.shadowOpacity = 0.3 // alpha값
 
-        //이미지 만들기
-        let imageAttachment = NSTextAttachment()
-        imageAttachment.image = UIImage(systemName: "chevron.right")
-        let font = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 25)]
-        //이미지 추가 같은 타입으로 설정
-        let attachmentString = NSAttributedString(attachment: imageAttachment)
-        //글자 만들기
-        let completeText = NSMutableAttributedString(string: "로그인이 \n필요해요.  ", attributes: font)
-        //글자에 이미지 추가
-        completeText.append(attachmentString)
-        logInLabel.attributedText = completeText
-        logInLabel.textAlignment = .left
-        logInLabel.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-        logInLabel.numberOfLines = 0
+        if Auth.auth().currentUser?.uid == nil {
+            let imageAttachment = NSTextAttachment()
+            imageAttachment.image = UIImage(systemName: "chevron.right")
+            let font = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 25)]
+            //이미지 추가 같은 타입으로 설정
+            let attachmentString = NSAttributedString(attachment: imageAttachment)
+            //글자 만들기
+            let completeText = NSMutableAttributedString(string: "로그인이 \n필요해요  ", attributes: font)
+            //글자에 이미지 추가
+            completeText.append(attachmentString)
+            logInLabel.attributedText = completeText
+            logInLabel.textAlignment = .left
+            logInLabel.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+            logInLabel.numberOfLines = 0
+        } else {
+            logInLabel.text = "ggggggg"
+            // 델리게이션 함수 쓸수 있는지 ,,
+        }
         let searchBarTaped = UITapGestureRecognizer(target: self, action: #selector(logIn(_:)))
         searchBarTaped.numberOfTouchesRequired = 1
         searchBarTaped.numberOfTapsRequired = 1
