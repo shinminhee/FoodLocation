@@ -17,6 +17,8 @@ class LogINViewController: UIViewController {
     let googleLoginButton = GIDSignInButton()
     var emptyNickName: String? = ""
     let nickVC: NickNameViewController?
+    let brownView = NeedLogInView()
+    let needLogInLabel = UILabel()
     
     init(nickVC: NickNameViewController) {
         self.nickVC = nickVC
@@ -37,6 +39,7 @@ class LogINViewController: UIViewController {
 //        GIDSignIn.sharedInstance()?.disconnect() // 연동해제
         setUI()
         configureUI()
+        setData()
         setGoogleSignInButton()
     }
     
@@ -100,6 +103,27 @@ extension LogINViewController: GIDSignInDelegate {
 }
 
 extension LogINViewController {
+    func setData() {
+        
+        brownView.backgroundColor = .darkGray
+        brownView.alpha = 0.95
+        let width: CGFloat = 220
+        let height: CGFloat = 100
+        brownView.layer.cornerRadius = 15
+        brownView.frame = CGRect(x: view.frame.midX - width / 2, y: view.frame.midY - 200, width: width, height: height)
+        
+        needLogInLabel.text = "로그인이 필요한 서비스입니다. \n로그인해주세요."
+        needLogInLabel.numberOfLines = 0
+        needLogInLabel.textColor = .yellow
+        needLogInLabel.textAlignment = .center
+        needLogInLabel.frame = CGRect(x: brownView.frame.minX, y: brownView.frame.minY, width: width, height: height)
+        view.addSubview(brownView)
+        view.addSubview(needLogInLabel)
+        
+        
+    }
+    
+    
     private func configureUI() {
         view.addSubview(googleLoginButton)
         googleLoginButton.translatesAutoresizingMaskIntoConstraints = false

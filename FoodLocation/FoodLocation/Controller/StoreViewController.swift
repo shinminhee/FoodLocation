@@ -22,7 +22,7 @@ class StoreViewController: UIViewController {
 
     }
     
-    @objc func logIn(_ sender: UIButton) {
+    @objc func registrationButton(_ sender: UIButton) {
         if Auth.auth().currentUser?.uid == nil {
             setData()
             
@@ -37,12 +37,35 @@ class StoreViewController: UIViewController {
 extension StoreViewController {
     
     func setData() {
-        view.addSubview(NeedLogInView(view: view))
-        NeedLogInView.animate(withDuration: 1) {
-            self.view.alpha = 0.9
-        } completion: { _ in
-            self.view.alpha = 0
+        let brownView = NeedLogInView()
+        let needLogInLabel = UILabel()
+        brownView.backgroundColor = .darkGray
+        brownView.alpha = 0.95
+        let width: CGFloat = 220
+        let height: CGFloat = 100
+        brownView.layer.cornerRadius = 15
+        brownView.frame = CGRect(x: view.frame.midX - width / 2, y: view.frame.midY - height / 2, width: width, height: height)
+        
+        needLogInLabel.text = "로그인이 필요한 서비스입니다. \n로그인해주세요."
+        needLogInLabel.numberOfLines = 0
+        needLogInLabel.alpha = 1
+        needLogInLabel.textColor = .yellow
+        needLogInLabel.textAlignment = .center
+        needLogInLabel.frame = CGRect(x: brownView.frame.minX, y: brownView.frame.minY, width: width, height: height)
+        view.addSubview(brownView)
+        view.addSubview(needLogInLabel)
+        
+        NeedLogInView.animate(withDuration: 3) {
+                brownView.alpha = 0
+                needLogInLabel.alpha = 0
         }
+//            completion: { _ in
+//            let perVC = PersonalViewController()
+//            perVC.modalPresentationStyle = .fullScreen
+//            self.present(perVC, animated: true, completion: nil)
+//        }
+
+
     }
     
     func setUI() {
@@ -91,7 +114,7 @@ extension StoreViewController {
         registrationButton.backgroundColor = UIColor(red: 255/255, green: 212/255, blue: 100/255, alpha: 1)
         registrationButton.layer.borderColor = UIColor.lightGray.cgColor
         registrationButton.layer.borderWidth = 0.3
-        registrationButton.addTarget(self, action: #selector(logIn(_:)), for: .touchUpInside)
+        registrationButton.addTarget(self, action: #selector(registrationButton(_:)), for: .touchUpInside)
         registrationButton.layer.shadowColor = UIColor.gray.cgColor // 색깔
         registrationButton.layer.masksToBounds = false
         registrationButton.layer.shadowOffset = CGSize(width: 0, height: 4)
