@@ -16,7 +16,6 @@ class ViewController: UIViewController {
     let searchViewBackImage = UIImageView()
     let searchViewImage = UIImageView()
     let searchViewLabel = UILabel()
-    let button = UIButton()
     let locationButton = UIButton()
     var currentLatitude: Double = 0
     var currentLongtitude: Double = 0

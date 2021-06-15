@@ -202,7 +202,7 @@ extension MapAndStoreViewController {
         NSLayoutConstraint.activate([
             storeNameLabel.topAnchor.constraint(equalTo: infoView.topAnchor, constant: 100),
             storeNameLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 20),
-            storeNameLabel.widthAnchor.constraint(equalToConstant: 200),
+            storeNameLabel.widthAnchor.constraint(equalToConstant: 90),
             storeNameLabel.heightAnchor.constraint(equalToConstant: 40),
             
             storeName.topAnchor.constraint(equalTo: storeNameLabel.bottomAnchor, constant: 10),
@@ -212,7 +212,7 @@ extension MapAndStoreViewController {
             
             locationLabel.topAnchor.constraint(equalTo: storeName.bottomAnchor, constant: 20),
             locationLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 20),
-            locationLabel.widthAnchor.constraint(equalToConstant: 200),
+            locationLabel.widthAnchor.constraint(equalToConstant: 90),
             locationLabel.heightAnchor.constraint(equalToConstant: 40),
             
             location.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 10),
@@ -222,7 +222,7 @@ extension MapAndStoreViewController {
             
             detailLabel.topAnchor.constraint(equalTo: location.bottomAnchor, constant: 20),
             detailLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 20),
-            detailLabel.widthAnchor.constraint(equalToConstant: 200),
+            detailLabel.widthAnchor.constraint(equalToConstant: 90),
             detailLabel.heightAnchor.constraint(equalToConstant: 40),
             
             detail.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 10),
@@ -232,7 +232,7 @@ extension MapAndStoreViewController {
             
             foodNameLabel.topAnchor.constraint(equalTo: detail.bottomAnchor, constant: 20),
             foodNameLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 20),
-            foodNameLabel.widthAnchor.constraint(equalToConstant: 200),
+            foodNameLabel.widthAnchor.constraint(equalToConstant: 90),
             foodNameLabel.heightAnchor.constraint(equalToConstant: 40),
             
             foodName.topAnchor.constraint(equalTo: foodNameLabel.bottomAnchor, constant: 10),
@@ -248,7 +248,7 @@ extension MapAndStoreViewController {
         detailLabel.text = "상세내용"
         detailLabel.backgroundColor = .blue
         foodNameLabel.text = "음식 이름"
-        foodNameLabel.backgroundColor = .black
+        foodNameLabel.backgroundColor = .systemPink
         
         storeName.font = UIFont.systemFont(ofSize: 15, weight: .light)
         location.font = UIFont.systemFont(ofSize: 15, weight: .light)

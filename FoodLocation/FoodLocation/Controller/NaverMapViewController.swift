@@ -45,6 +45,7 @@ class NaverMapViewController: UIViewController {
         setCamera()
         setSearchView()
         setSpot()
+        locationManager
     }
     @objc
     func searchBarTaped(_ sender: UITapGestureRecognizer) {
@@ -76,40 +77,7 @@ protocol NaverMapViewControllerDelegate: class {
 }
 
 extension NaverMapViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        currentLatitude = locations.last!.coordinate.latitude
-        currentLongtitude = locations.last!.coordinate.longitude
-        if let coor = manager.location?.coordinate{
-            
-            let ceo: CLGeocoder = CLGeocoder()
-            currentLatitude = coor.latitude
-            currentLongtitude = coor.longitude
-            let loc: CLLocation = CLLocation(latitude: coor.latitude, longitude: coor.longitude) // 이거 mapAndStore뷰컨으로 보내야됨
-            ceo.reverseGeocodeLocation(loc, completionHandler:
-                                        {(placemarks, error) -> Void in
-                                            if error != nil {
-                                                NSLog("\(error)")
-                                                return
-                                            }
-                                            let coord = NMGLatLng(lat: self.currentLatitude, lng: self.currentLongtitude)
-                                            let cameraUpdate = NMFCameraUpdate(scrollTo: coord)
-
-//                                            cameraUpdate.animation = .fly
-//                                            cameraUpdate.animationDuration = 1
-//                                            self.mapView.positionMode = .direction
-                                            self.mapView.moveCamera(cameraUpdate)
-                                            guard let placemark = placemarks?.first,
-                                                  let addrList = placemark.addressDictionary?["FormattedAddressLines"] as? [String] else {
-                                                return
-                                            }
-                                            let address = addrList.joined(separator: " ")
-                                            self.addressLabel.text = address
-                                        })
-        }
-    }
-    
-    
-    
+   
     //            print("latitude" + String(coor.latitude) + "/ longitude" + String(coor.longitude))
     //            let ceo: CLGeocoder = CLGeocoder()
     //            currentLatitude = coor.latitude
@@ -154,6 +122,37 @@ extension NaverMapViewController: CLLocationManagerDelegate {
 }
 
 extension NaverMapViewController {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        currentLatitude = locations.last!.coordinate.latitude
+        currentLongtitude = locations.last!.coordinate.longitude
+        if let coor = manager.location?.coordinate {
+            
+            let ceo: CLGeocoder = CLGeocoder()
+            currentLatitude = coor.latitude
+            currentLongtitude = coor.longitude
+            let loc: CLLocation = CLLocation(latitude: coor.latitude, longitude: coor.longitude) // 이거 mapAndStore뷰컨으로 보내야됨
+            ceo.reverseGeocodeLocation(loc, completionHandler:
+                                        {(placemarks, error) -> Void in
+                                            if error != nil {
+                                                NSLog("\(error)")
+                                                return
+                                            }
+                                            let coord = NMGLatLng(lat: self.currentLatitude, lng: self.currentLongtitude)
+                                            let cameraUpdate = NMFCameraUpdate(scrollTo: coord)
+
+//                                            cameraUpdate.animation = .fly
+//                                            cameraUpdate.animationDuration = 1
+//                                            self.mapView.positionMode = .direction
+                                            self.mapView.moveCamera(cameraUpdate)
+                                            guard let placemark = placemarks?.first,
+                                                  let addrList = placemark.addressDictionary?["FormattedAddressLines"] as? [String] else {
+                                                return
+                                            }
+                                            let address = addrList.joined(separator: " ")
+                                            self.addressLabel.text = address
+                                        })
+        }
+    }
     
     
     func setSpot() {

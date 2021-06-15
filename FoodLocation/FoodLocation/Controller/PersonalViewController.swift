@@ -401,7 +401,6 @@ extension PersonalViewController {
             regiCollectionView.trailingAnchor.constraint(equalTo:  regiStoreView.trailingAnchor),
             regiCollectionView.heightAnchor.constraint(equalTo:  regiStoreView.heightAnchor)
         ])
-        
         regiCollectionLayout.scrollDirection = .horizontal
         regiCollectionLayout.minimumInteritemSpacing = 10
         regiCollectionLayout.minimumLineSpacing = 10

@@ -33,16 +33,16 @@ class RegistrationCollectionViewCell: UICollectionViewCell {
 //        }
 //    }
     
-//    override var isSelected: Bool {
-//            willSet {
-//                if newValue {
-//                    menuImage.image = UIImage(named: menuText[row]) // 배열 꺼내 쓰는 방법
-//                }
-//                else {
-//                    menuImage.image = UIImage(named: blackMenuText[row])
-//                }
-//            }
-//        }
+    override var isSelected: Bool {
+            willSet {
+                if newValue {
+                    menuImage.image = UIImage(named: menuText[row]) // 배열 꺼내 쓰는 방법
+                }
+                else {
+                    menuImage.image = UIImage(named: blackMenuText[row])
+                }
+            }
+        }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

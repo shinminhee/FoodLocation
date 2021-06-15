@@ -74,7 +74,8 @@ extension MyStoreViewController {
             myStore.heightAnchor.constraint(equalToConstant: 100)
         ])
         myStore.setTitle("등록한 가게 보러가기", for: .normal)
-        myStore.backgroundColor = .red
+        myStore.setTitleColor(.white, for: .normal)
+        myStore.backgroundColor = UIColor(red: 255/255, green: 212/255, blue: 100/255, alpha: 1)
         myStore.addTarget(self, action: #selector(myStore(_:)), for: .touchUpInside)
     }
 }

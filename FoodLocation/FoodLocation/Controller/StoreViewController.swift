@@ -14,6 +14,7 @@ class StoreViewController: UIViewController {
     let registrationLabel = UILabel()
     let smallLabel = UILabel()
     let registrationButton = UIButton()
+    let asdlabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +25,8 @@ class StoreViewController: UIViewController {
     
     @objc func registrationButton(_ sender: UIButton) {
         if Auth.auth().currentUser?.uid == nil {
-            setData()
-            
+            let VC = LogINViewController()
+
         } else {
             let logInVC = RegistrationTableViewController()
             logInVC.modalPresentationStyle = .fullScreen

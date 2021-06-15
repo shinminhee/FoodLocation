@@ -16,9 +16,13 @@ class LogINViewController: UIViewController {
     let closeButton = UIImageView()
     let googleLoginButton = GIDSignInButton()
     var emptyNickName: String? = ""
-    let nickVC: NickNameViewController?
+    var nickVC: NickNameViewController?
     let brownView = NeedLogInView()
     let needLogInLabel = UILabel()
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nil, bundle: nil)
+    }
     
     init(nickVC: NickNameViewController) {
         self.nickVC = nickVC
@@ -41,6 +45,14 @@ class LogINViewController: UIViewController {
         configureUI()
         setData()
         setGoogleSignInButton()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animate(withDuration: 1) {
+            self.brownView.alpha = 0
+            self.needLogInLabel.alpha = 0
+        }
     }
     
     func setUserStatus() {
@@ -119,8 +131,7 @@ extension LogINViewController {
         needLogInLabel.frame = CGRect(x: brownView.frame.minX, y: brownView.frame.minY, width: width, height: height)
         view.addSubview(brownView)
         view.addSubview(needLogInLabel)
-        
-        
+
     }
     
     
