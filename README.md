@@ -1,4 +1,5 @@
-<<<<<<< HEAD
+
+
 # FoodLocation-ios
 
 붕세권 App을 Clone하여 만든 어플리케이션 입니다.
@@ -75,5 +76,3 @@
 
 <img width="192" alt="스크린샷 2021-06-18 오후 6 24 44" src="https://user-images.githubusercontent.com/76473014/122541539-b19b8b00-d064-11eb-8801-ddb8a4772837.png" width="180" height="310" > <img width="192" alt="스크린샷 2021-06-18 오후 6 24 14" src="https://user-images.githubusercontent.com/76473014/122541546-b3fde500-d064-11eb-92f5-2352d78f357b.png" width="180" height="310" > <img width="192" alt="스크린샷 2021-06-18 오후 6 24 24" src="https://user-images.githubusercontent.com/76473014/122541555-b52f1200-d064-11eb-9c84-6ebdbe73abc1.png" width="180" height="310" > <img width="192" alt="스크린샷 2021-06-18 오후 6 24 31" src="https://user-images.githubusercontent.com/76473014/122541557-b6603f00-d064-11eb-9d22-2cd21e2454f5.png" width="180" height="310" > <img width="192" alt="스크린샷 2021-06-18 오후 6 23 50" src="https://user-images.githubusercontent.com/76473014/122541562-b6f8d580-d064-11eb-9180-acd394cd74fa.png" width="180" height="310" > <img width="192" alt="스크린샷 2021-06-18 오후 6 24 48" src="https://user-images.githubusercontent.com/76473014/122541569-b8c29900-d064-11eb-87e9-b7316718ac10.png" width="180" height="310" > <img width="192" alt="스크린샷 2021-06-18 오후 6 24 39" src="https://user-images.githubusercontent.com/76473014/122541571-b9f3c600-d064-11eb-85f4-1f1e6954800c.png" width="180" height="310" >
 =======
-
->>>>>>> bbced409499442e3476f5f94d2f491ff180c63ea
